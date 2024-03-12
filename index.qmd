@@ -1,0 +1,96 @@
+# Presentasi ini dibuat dengan [Quarto](https://quarto.org)
+
+- Quarto adalah salah satu software yang dikembangkan oleh [Posit](https://posit.co). Salah satu kegunaannya adalah membuat presentasi seperti ini. 
+- Sesi interaktif pada presentasi ini dapat memudahkan Anda dalam memilih bahasa pemrograman yang akan digunakan sesuai dengan topik, yaitu R atau Python (silahkan klik pada salah satu tab di bawah ini)
+
+::: {.panel-tabset}
+
+## R
+
+```{r hello-r, eval=TRUE, echo=TRUE}
+print("Hello, R!")
+```
+
+## Python
+
+```{python hello-python, eval=TRUE, echo=TRUE}
+print("Hello, Python!")
+```
+
+:::
+
+## Outline
+
+### Hari ke-1: 22 Maret 2024
+
+1.  Pendahuluan Analisis Data Iklim
+2.  Pengambilan Data Iklim dan Pra-Pross Pengolahan Data Iklim
+3.  Explorative Data Analysis (EDA) Iklim
+
+### Hari ke-2: 23 Maret 2024
+
+1.  Visualisai Data Iklim
+2.  Visualisasi Interaktif
+
+
+# Sebelum Mulai
+
+Pastikan Anda telah memasang bahasa pemrograman R dan/atau Python sesuai dengan Sistem Operasi masing-masing, serta Text Editor/IDE yang dirasa nyaman (contoh: RStudio, Jupyter, VSCode, JetBrains PyCharm, atau Neovim 🗿)
+
+## R
+
+- Rekomendasi IDE: [RStudio](https://www.rstudio.com/products/rstudio/download/)
+
++----------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Sistem Operasi | Link unduh                                                                                                                                                  |
++================+=============================================================================================================================================================+
+| Windows 10/11  | <https://cran.r-project.org/bin/windows/base/R-4.3.3-win.exe>                                                                                               |
++----------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Ubuntu 22.04   | Ikuti langkah ini <https://cran.r-project.org/bin/linux/ubuntu/>                                                                                            |
++----------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| MacOS          | -   <https://cran-r--project-org.translate.goog/bin/macosx/big-sur-arm64/base/R-4.3.3-arm64.pkg?_x_tr_sl=en&_x_tr_tl=id&_x_tr_hl=id&_x_tr_pto=tc> (M1-M3)   |
+|                | -   <https://cran-r--project-org.translate.goog/bin/macosx/big-sur-x86_64/base/R-4.3.3-x86_64.pkg?_x_tr_sl=en&_x_tr_tl=id&_x_tr_hl=id&_x_tr_pto=tc> (Intel) |
++----------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
++----------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+## Python
+
+- Rekomenasi IDE: [Jupyter Notebook](https://jupyter.org)
+- Pemasangan Python disarankan menggunakan [Anaconda/Miniconda](https://www.anaconda.com/products/distribution)
+- Anda juga dapat memanfaatkan Google Colaboratory jika tidak ingin memasang Python di komputer/laptop lokal
+
+
+## Langkah Pemasangan Jupyter Notebook
+
+- Jika Anda telah memasang Anaconda, Jupyter Notebook sudah terpasang secara otomatis, *kecuali* Miniconda. 
+- Untuk pengguna Miniconda, Anda perlu memasang Jupyter Notebook secara manual dengan perintah berikut di terminal Anaconda Prompt
+```{bash jupyter-install}
+conda install -c conda-forge jupyterlab
+```
+- Untuk membuka Jupyter Notebook, buka Anaconda Navigator dan klik Jupyter Notebook
+- Atau, bisa menggunakan perintah berikut di terminal Anaconda Prompt. Secara otomatis, Jupyter Notebook akan terbuka di browser.
+```{bash jupyter-start}
+jupyter notebook
+```
+- Untuk MacOS dan Linux, jupyter notebook juga telah terpasang otomatis saat memasang Anaconda. Perintah di atas juga berlaku di MacOS dan Linux
+
+
+# Package
+
+Anda perlu memasang beberapa package di bawah ini sesuai dengan bahasa pemrograman yang dipilih. Jika Anda menggunakan Python di RStudio, pemasangan package Python menggunakan perintah R (lihat bagian `Python (r-reticulate)`)
+
+::: {.panel-tabset}
+
+### R
+
+```{r install-r-packages}
+install.packages(c("tidyverse", "metR", "ncdf4", "plotly", "leaflet", "raster", "sf", "gstat")
+```
+
+### Python
+
+```{bash install-python-packages}
+conda install -c conda-forge plotly geopandas rioxarray
+```
+
+:::
