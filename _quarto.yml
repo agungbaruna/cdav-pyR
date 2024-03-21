@@ -1,12 +1,16 @@
-title: "Analisis Data Iklim dengan R & Python"
-subtitle: "Sekolah Pascasarjana - Klimatologi Terapan - IPB University"
+title: "Analisis dan Visualisasi Data Iklim dengan R & Python"
+subtitle: "Klimatologi Terapan - IPB University"
 affiliation: "Institut Pertanian Bogor"
 author: "Tutor: Agung Baruna Setiawan Noor, S.Si., M.Si."
 width: 2000
-height: 900
+height: 1400
 format:
   revealjs:
     theme: ['default', 'custom.scss']
+    transition: slide
+    background-transition: fade
+    footer: "Analisis dan Visualisasi Data Iklim dengan R & Python"
+logo: 'images/logo.png'
 execute: 
   echo: true
   eval: false
