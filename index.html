@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.4.550">
 
   <meta name="author" content="Tutor: Agung Baruna Setiawan Noor, S.Si., M.Si.">
-  <title>Analisis Data Iklim dengan R &amp; Python</title>
+  <title>Analisis dan Visualisasi Data Iklim dengan R &amp; Python</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -385,14 +385,23 @@
       margin-right: 0; 
     }
   </style>
+  <script src="index_files/libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
+  <script src="index_files/libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+  <link href="index_files/libs/leaflet-1.3.1/leaflet.css" rel="stylesheet">
+  <script src="index_files/libs/leaflet-1.3.1/leaflet.js"></script>
+  <link href="index_files/libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet">
+  <script src="index_files/libs/proj4-2.6.2/proj4.min.js"></script>
+  <script src="index_files/libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+  <link href="index_files/libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet">
+  <script src="index_files/libs/leaflet-binding-2.2.0/leaflet.js"></script>
 </head>
 <body class="quarto-light">
   <div class="reveal">
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Analisis Data Iklim dengan R &amp; Python</h1>
-  <p class="subtitle">Sekolah Pascasarjana - Klimatologi Terapan - IPB University</p>
+  <h1 class="title">Analisis dan Visualisasi Data Iklim dengan R &amp; Python</h1>
+  <p class="subtitle">Klimatologi Terapan - IPB University</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -403,7 +412,6 @@ Tutor: Agung Baruna Setiawan Noor, S.Si., M.Si.
 </div>
 
 </section>
-<section>
 <section id="presentasi-ini-dibuat-dengan-quarto" class="title-slide slide level1 center">
 <h1>Presentasi ini dibuat dengan <a href="https://quarto.org">Quarto</a></h1>
 <ul>
@@ -432,26 +440,54 @@ Tutor: Agung Baruna Setiawan Noor, S.Si., M.Si.
 </div>
 </div>
 </section>
-<section id="outline" class="slide level2">
-<h2>Outline</h2>
-<h3 id="hari-ke-1-22-maret-2024">Hari ke-1: 22 Maret 2024</h3>
-<ol type="1">
-<li>Pendahuluan Analisis Data Iklim</li>
-<li>Pengambilan Data Iklim dan Pra-Pross Pengolahan Data Iklim</li>
-<li>Explorative Data Analysis (EDA) Iklim</li>
-</ol>
-<h3 id="hari-ke-2-23-maret-2024">Hari ke-2: 23 Maret 2024</h3>
-<ol type="1">
-<li>Visualisai Data Iklim</li>
-<li>Visualisasi Interaktif</li>
-</ol>
-</section></section>
+
+<section id="mungkin-sudah-kenal" class="title-slide slide level1 center">
+<h1>🤝 Mungkin Sudah Kenal</h1>
+<ul>
+<li>Agung Baruna Setiawan Noor, panggil saja Agung</li>
+<li>S1: Meteorologi Terapan, GFM, IPB (2015-2019)</li>
+<li>S2: Klimatologi Terapan, Sekolah Pascasarjana, IPB (2020-2021)</li>
+<li>Rumahnya di sini 👇</li>
+</ul>
+<div class="panel-tabset">
+<ul id="tabset-2" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-2-1">R</a></li><li><a href="#tabset-2-2">Python</a></li></ul>
+<div class="tab-content">
+<div id="tabset-2-1">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href=""></a><span class="fu">library</span>(leaflet)</span>
+<span id="cb5-2"><a href=""></a><span class="fu">leaflet</span>() <span class="sc">%&gt;%</span> <span class="fu">addTiles</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb5-3"><a href=""></a>    <span class="fu">setView</span>(<span class="at">lng =</span> <span class="fl">106.685</span>, <span class="at">lat =</span> <span class="sc">-</span><span class="fl">6.575</span>, <span class="at">zoom =</span> <span class="dv">12</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb5-4"><a href=""></a>    <span class="fu">addMarkers</span>(<span class="at">lng =</span> <span class="fl">106.685</span>, <span class="at">lat =</span> <span class="sc">-</span><span class="fl">6.575</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="leaflet html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-af11e7815a699aa21f98" style="width:100%;height:400px;"></div>
+<script type="application/json" data-for="htmlwidget-af11e7815a699aa21f98">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"https://openstreetmap.org/copyright/\">OpenStreetMap<\/a>,  <a href=\"https://opendatacommons.org/licenses/odbl/\">ODbL<\/a>"}]},{"method":"addMarkers","args":[-6.575,106.685,null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},null,null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"setView":[[-6.575,106.685],12,[]],"limits":{"lat":[-6.575,-6.575],"lng":[106.685,106.685]}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</div>
+<div id="tabset-2-2">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href=""></a><span class="im">import</span> folium</span>
+<span id="cb6-2"><a href=""></a>m <span class="op">=</span> folium.Map(location<span class="op">=</span>[<span class="op">-</span><span class="fl">6.575</span>, <span class="fl">106.685</span>], zoom_start<span class="op">=</span><span class="dv">12</span>)</span>
+<span id="cb6-3"><a href=""></a>folium.Marker([<span class="op">-</span><span class="fl">6.575</span>, <span class="fl">106.685</span>]).add_to(m)</span>
+<span id="cb6-4"><a href=""></a>m</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div class="leaflet html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-02540bea63e17ff5ee27" style="width:100%;height:400px;"></div>
+<script type="application/json" data-for="htmlwidget-02540bea63e17ff5ee27">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"https://openstreetmap.org/copyright/\">OpenStreetMap<\/a>,  <a href=\"https://opendatacommons.org/licenses/odbl/\">ODbL<\/a>"}]},{"method":"addMarkers","args":[-6.575,106.685,null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},null,null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"setView":[[-6.575,106.685],12,[]],"limits":{"lat":[-6.575,-6.575],"lng":[106.685,106.685]}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
 <section>
 <section id="sebelum-mulai" class="title-slide slide level1 center">
 <h1>Sebelum Mulai</h1>
 <p>Pastikan Anda telah memasang bahasa pemrograman R dan/atau Python sesuai dengan Sistem Operasi masing-masing, serta Text Editor/IDE yang dirasa nyaman (contoh: RStudio, Jupyter, VSCode, JetBrains PyCharm, atau Neovim 🗿)</p>
 </section>
-<section id="r-1" class="slide level2">
+<section id="r-2" class="slide level2">
 <h2>R</h2>
 <ul>
 <li>Rekomendasi IDE: <a href="https://www.rstudio.com/products/rstudio/download/">RStudio</a></li>
@@ -486,61 +522,1084 @@ Tutor: Agung Baruna Setiawan Noor, S.Si., M.Si.
 </tbody>
 </table>
 </section>
-<section id="python-1" class="slide level2">
-<h2>Python</h2>
+<section id="python-2" class="slide level2">
+<h2>🐍 Python</h2>
 <ul>
-<li>Rekomenasi IDE: <a href="https://jupyter.org">Jupyter Notebook</a></li>
+<li>Rekomendasi IDE: <a href="https://jupyter.org">Jupyter Notebook</a></li>
 <li>Pemasangan Python disarankan menggunakan <a href="https://www.anaconda.com/products/distribution">Anaconda/Miniconda</a></li>
 <li>Anda juga dapat memanfaatkan Google Colaboratory jika tidak ingin memasang Python di komputer/laptop lokal</li>
-<li>Jika Anda sering menggunakan RStudio, Python dapat dipasang dengan package <code>reticulate</code> pada bahasa R dengan perintah</li>
 </ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href=""></a><span class="fu">install.packages</span>(<span class="st">'reticulate'</span>)</span>
-<span id="cb5-2"><a href=""></a>reticulate<span class="sc">::</span><span class="fu">install_miniconda</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p>Pemasangan package di dalam Google Colaboratory dapat dilakukan dengan perintah <code>!conda install -c conda-forge nama-package</code></p>
+</div>
+</div>
 </div>
 </section>
 <section id="langkah-pemasangan-jupyter-notebook" class="slide level2">
 <h2>Langkah Pemasangan Jupyter Notebook</h2>
 <ul>
-<li>Jika Anda telah memasangan Anaconda, Jupyter Notebook sudah terpasang secara otomatis. Untuk membuka Jupyter Notebook, buka Anaconda Navigator dan klik Jupyter Notebook</li>
+<li>Jika Anda telah memasang Anaconda, Jupyter Notebook sudah terpasang secara otomatis, <em>kecuali</em> Miniconda.</li>
+<li>Untuk membuka Jupyter Notebook, buka Anaconda Navigator dan klik Jupyter Notebook</li>
 <li>Atau, bisa menggunakan perintah berikut di terminal Anaconda Prompt. Secara otomatis, Jupyter Notebook akan terbuka di browser.</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href=""></a><span class="ex">jupyter</span> notebook</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href=""></a><span class="ex">jupyter</span> notebook</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li>Untuk MacOS dan Linux, jupyter notebook juga telah terpasang otomatis saat memasang Anaconda. Perintah di atas juga berlaku di MacOS dan Linux</li>
+<li>Untuk pengguna Miniconda, Anda perlu memasang Jupyter Notebook secara manual dengan perintah berikut di terminal Anaconda Prompt</li>
 </ul>
 </section></section>
+<section id="data" class="title-slide slide level1 center">
+<h1>📊 Data</h1>
+<p>Data-data di bawah ini dapat diunduh pada halaman <a href="https://s.id/cdav-data">https://s.id/cdav-data</a></p>
+<ul>
+<li>Data iklim Observasi harian di Pulau Jawa oleh <a href="https://dataonline.bmkg.go.id">BMKG</a></li>
+<li>Data curah hujan reanalisis bulanan <a href="https://data.chc.ucsb.edu">Climate Hazards Group InfraRed Precipitation with Station (CHIRPS)</a></li>
+<li>Data suhu udara dan curah hujan reanalisis <a href="https://crudata.uea.ac.uk">Climate Research Unit (CRU)</a> bulanan</li>
+</ul>
+</section>
+
+<section>
 <section id="package" class="title-slide slide level1 center">
-<h1>Package</h1>
-<p>Anda perlu memasang beberapa package di bawah ini sesuai dengan bahasa pemrograman yang dipilih. Jika Anda menggunakan Python di RStudio, pemasangan package Python menggunakan perintah R (lihat bagian <code>Python (r-reticulate)</code>)</p>
+<h1>📦 Package</h1>
+<p>Anda perlu memasang beberapa package di bawah ini sesuai dengan bahasa pemrograman yang akan digunakan.</p>
 <div class="panel-tabset">
-<ul id="tabset-2" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-2-1">R</a></li><li><a href="#tabset-2-2">Python</a></li><li><a href="#tabset-2-3">Python (r-reticulate)</a></li></ul>
+<ul id="tabset-3" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-3-1">R</a></li><li><a href="#tabset-3-2">Python</a></li></ul>
 <div class="tab-content">
-<div id="tabset-2-1">
+<div id="tabset-3-1">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href=""></a><span class="fu">install.packages</span>(<span class="fu">c</span>(<span class="st">"tidyverse"</span>, <span class="st">"metR"</span>, <span class="st">"ncdf4"</span>, <span class="st">"plotly"</span>, <span class="st">"leaflet"</span>, <span class="st">"raster"</span>, <span class="st">"sf"</span>, <span class="st">"gstat"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href=""></a><span class="fu">install.packages</span>(<span class="fu">c</span>(<span class="st">"tidyverse"</span>, <span class="st">"metR"</span>, <span class="st">"readxl"</span>, <span class="st">"ncdf4"</span>, </span>
+<span id="cb8-2"><a href=""></a>                   <span class="st">"plotly"</span>, <span class="st">"leaflet"</span>, <span class="st">"tmap"</span>, <span class="st">"leaflet.extras"</span>, </span>
+<span id="cb8-3"><a href=""></a>                   <span class="st">"raster"</span>, <span class="st">"sf"</span>, <span class="st">"gstat"</span>, <span class="st">"PCICt"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
-<div id="tabset-2-2">
+<div id="tabset-3-2">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href=""></a><span class="ex">conda</span> install <span class="at">-c</span> conda-forge plotly geopandas rioxarray</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href=""></a><span class="ex">conda</span> create <span class="at">-n</span> cdav-pyR <span class="at">-c</span> conda-forge ipykernel jupyter plotly geopandas rioxarray leafmap openpyxl cartopy iris</span>
+<span id="cb9-2"><a href=""></a><span class="ex">conda</span> activate cdav-pyR</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
-<div id="tabset-2-3">
+</div>
+</div>
+</section>
+<section id="apa-yang-akan-dipelajari" class="slide level2">
+<h2>Apa yang akan dipelajari?</h2>
+<h3 id="hari-ke-1-22-maret-2024">Hari ke-1: 22 Maret 2024</h3>
+<ol type="1">
+<li>R &amp; Python untuk Analisis Data Iklim</li>
+<li>Jenis Data Iklim</li>
+<li>Pra-Proses Pengolahan Data Iklim</li>
+<li>Explorative Data Analysis (EDA) Iklim</li>
+<li>Interpolasi Spasial Data Iklim</li>
+</ol>
+<h3 id="hari-ke-2-23-maret-2024">Hari ke-2: 23 Maret 2024</h3>
+<ol type="1">
+<li>Dasar Visualisai Data Iklim</li>
+<li>Visualisasi Interaktif Data Iklim</li>
+</ol>
+<div title="Learning by Case Study">
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Learning by Case Study</strong></p>
+</div>
+<div class="callout-content">
+<p>Di dalam tutorial ini, data-data di atas yang telah Anda unduh akan digunakan langsung sebagai bahan praktik sehingga beberapa teori dasar tentang R &amp; Python akan dijelaskan hanya secara singkat</p>
+</div>
+</div>
+</div>
+</div>
+</section></section>
+<section>
+<section id="hari-ke-1-22-maret-2024-1" class="title-slide slide level1 center">
+<h1>Hari ke-1: 22 Maret 2024</h1>
+<ol type="1">
+<li>R &amp; Python untuk Analisis Data Iklim</li>
+<li>Jenis Data Iklim</li>
+<li>Pra-Proses Pengolahan Data Iklim</li>
+<li>Explorative Data Analysis (EDA) Iklim</li>
+<li>Interpolasi Spasial Data Iklim</li>
+</ol>
+<div title="Useful References">
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Useful References</strong></p>
+</div>
+<div class="callout-content">
+<p><a href="https://projectpythia.org">https://projectpythia.org</a> – <a href="https://r4ds.had.co.nz">https://r4ds.had.co.nz</a> – <a href="https://leafmap.org">https://leafmap.org</a> – <a href="https://github.com/sacridini/Awesome-Geospatial">https://github.com/sacridini/Awesome-Geospatial</a> – <a href="https://github.com/pangeo-data/awesome-open-climate-science">https://github.com/pangeo-data/awesome-open-climate-science</a> – <a href="https://github.com/meteostat/meteostat-python">https://github.com/meteostat/meteostat-python</a> – <a href="https://github.com/pangeo-data/WeatherBench">https://github.com/pangeo-data/WeatherBench</a></p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="r-python-untuk-analisis-data-iklim-1" class="slide level2">
+<h2>R &amp; Python untuk Analisis Data Iklim (1)</h2>
+<ul>
+<li>R dan Python merupakan bahasa pemrograman interpreter. Pada awalnya, bahasa tersebut memiliki kegunaan yang berbeda.</li>
+<li>R umum digunakan untuk analisis dan visualisasi data statistik, sedangkan python adalah bahasa pemrograman umum, yaitu tidak dibatasi pada satu bidang khusus</li>
+<li>Seiring berkembangnya kedua bahasa pemrograman ini, keduanya dapat menjadi pilihan yang baik untuk analisis data iklim.</li>
+<li>Data iklim saat ini tersedia dengan berbagai format data, serta ukuran file nya yang semakin besar. Jadi, kedua bahasa pemrograman ini sebagai pengolah data dapat dimanfaatkan.</li>
+<li>Beberapa package R dan Python yang memiliki kemiripan fungsi:</li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th>R</th>
+<th>Python</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>dplyr</code>/<code>data.table</code></td>
+<td><code>pandas</code>/<code>polars</code></td>
+</tr>
+<tr class="even">
+<td><code>ggplot2</code></td>
+<td><code>matplotlib</code>/<code>seaborn</code>/<code>bokeh</code></td>
+</tr>
+<tr class="odd">
+<td><code>rasterVis</code></td>
+<td><code>iris</code></td>
+</tr>
+<tr class="even">
+<td><code>leaflet</code></td>
+<td><code>leafmap</code></td>
+</tr>
+<tr class="odd">
+<td><code>ncdf4</code>/<code>metR</code></td>
+<td><code>xarray</code>/<code>netcdf4</code></td>
+</tr>
+<tr class="even">
+<td><code>raster</code>/<code>stars</code>/<code>terra</code></td>
+<td><code>rasterio</code>/<code>rioxarray</code></td>
+</tr>
+<tr class="odd">
+<td><code>sf</code>/<code>sp</code></td>
+<td><code>geopandas</code>/<code>shapely</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="r-python-untuk-analisis-data-iklim-2" class="slide level2">
+<h2>R &amp; Python untuk Analisis Data Iklim (2)</h2>
+<div>
+<ul>
+<li class="fragment">Mengapa saya memilih R?
+<ul>
+<li class="fragment">Indeks mulai dari 1 🗿</li>
+<li class="fragment"><em>Package</em> statistik dan visualisasi lebih banyak, seperti <code>dplyr</code>, <code>datatable</code>, <code>ggplot2</code>, …, bahkan spasial, seperti <code>raster</code>, <code>stars</code>, <code>sf</code>, <code>tmap</code>, <code>leaflet</code>, …</li>
+<li class="fragment">Lebih mudah sintaksnya</li>
+</ul></li>
+<li class="fragment">Mengapa saya memilih Python?
+<ul>
+<li class="fragment">Walaupun R &amp; Python sama-sama bahasa pemrograman interpreter di mana kecepatan eksekusi selalu lebih lambat dibandingkan dengan C atau Fortran, Python lebih cepat daripada R (untuk kasus tertentu)</li>
+<li class="fragment">Manajemen memory lebih baik</li>
+<li class="fragment">Lebih mudah melakukan komputasi paralel dengan <code>dask</code> sehingga cocok untuk data besar</li>
+</ul></li>
+<li class="fragment">Mengapa saya tidak memilih R?
+<ul>
+<li class="fragment">Manajemen memori kurang baik sehingga membutuhkan RAM yang lebih besar (untuk kasus data besar)</li>
+<li class="fragment">Sangat <em>tricky</em> untuk menjalankan komputasi paralel</li>
+</ul></li>
+<li class="fragment">Mengapa saya tidak memilih Python?
+<ul>
+<li class="fragment">Indeks mulai dari 0 🗿</li>
+<li class="fragment">Sintaks relatif sulit daripada R jika yang pertama kali dipelajari adalah R</li>
+<li class="fragment">Package statistik dan visualisasi tidak sebanyak R</li>
+<li class="fragment">Sintaks untuk melakukan visualisasi relatif sulit, apalagi jika membuat grafik panel karena membutuhkan perulangan (kasus di <code>matplotlib</code>)</li>
+</ul></li>
+</ul>
+</div>
+</section>
+<section id="jenis-data-iklim" class="slide level2">
+<h2>Jenis Data Iklim</h2>
+<ul>
+<li>Data iklim memiliki berbagai bentuk, mulai dari data observasi, hasil model (biasanya berbentuk grid), serta data citra satelit</li>
+<li>Format tipe data iklim: spreadsheet/database (seperti Excel, CSV, TSV, SQLite, …), <a href="https://www.unidata.ucar.edu/software/netcdf">netCDF</a>, <a href="https://hdfgroup.org">HDF</a>, <a href="https://climatedataguide.ucar.edu/climate-tools/GRIB">GRIB</a>, dan <a href="https://zarr.dev">Zarr</a>.</li>
+<li>Dimensi data iklim: waktu (t), lokasi (x, y, z), dan variabel (pr, t2m, u10, v10, …)</li>
+<li>Semakin berkembangnya teknologi komputasi, data iklim saat ini semakin banyak sehingga ukuran file datanya juga semakin besar. Contoh data iklim tersedia gratis: <a href="https://registry.opendata.aws/noaa-gfs-bdp-pds/">Global Forecast System (GFS)</a>, <a href="https://data.ecmwf.int/">ECMWF IFS</a>, dan <a href="https://cds.climate.copernicus.eu/cdsapp#!/dataset/reanalysis-era5-single-levels?tab=overview">ERA5</a></li>
+</ul>
+
+<img data-src="images/climatedata3d.png" style="width:30.0%" class="r-stretch"><div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Tip</strong></p>
+</div>
+<div class="callout-content">
+<p>Untuk mengubah format data iklim GRIB menjadi netCDF, Anda dapat menggunakan software Climate Data Operator (CDO) dan perintahnya adalah <code>cdo -f nc copy nama-file.grib nama-file.nc</code></p>
+</div>
+</div>
+</div>
+</section>
+<section id="pra-proses-pengolahan-data-iklim-1" class="slide level2">
+<h2>Pra-Proses Pengolahan Data Iklim (1)</h2>
+<ul>
+<li>Sebelum mengolah, pastikan Anda punya datanya dulu 🗿</li>
+<li>Data iklim biasanya berupa data mentah (tulisan tangan). Tapi untuk saat ini, khususnya data observasi, data mentah ini sudah tersedia dalam format digital. Hanya saja, ketersediaan data untuk setiap lokasi pengamatan terkadang terdapat data yang hilang (missing value) sehingga data ini perlu diisi dengan beberapa metode tertentu.</li>
+<li>Untuk mengimpor file tersebut ke dalam R/Python, Anda dapat menggunakan package <code>readxl</code> (R) atau <code>pandas</code> (Python)</li>
+</ul>
+<div class="panel-tabset">
+<ul id="tabset-4" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-4-1">R</a></li><li><a href="#tabset-4-2">Python</a></li></ul>
+<div class="tab-content">
+<div id="tabset-4-1">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href=""></a>reticulate<span class="sc">::</span><span class="fu">conda_install</span>(<span class="st">"plotly"</span>, <span class="st">"geopandas"</span>, <span class="st">"rioxarray"</span>, <span class="at">conda =</span> <span class="st">"auto"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href=""></a><span class="fu">library</span>(readxl)</span>
+<span id="cb10-2"><a href=""></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb10-3"><a href=""></a><span class="fu">library</span>(lubridate)</span>
+<span id="cb10-4"><a href=""></a>dats <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"data/BMKG-Jawa.xlsx"</span>, <span class="at">sheet =</span> <span class="dv">2</span>)</span>
+<span id="cb10-5"><a href=""></a><span class="fu">head</span>(dats)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 14
+  Tanggal     Tn    Tx  Tavg RH_avg    RR    ss  ff_x ddd_x ff_avg ddd_car   lon
+  &lt;chr&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;   &lt;dbl&gt;
+1 01-01-1…  23.6  29.4  25.9     84     6   2.7     3   180      1 S&nbsp;       113.
+2 02-01-1…  25    30.4  27.9     78     6   2.1     4   225      3 SW       113.
+3 03-01-1…  23.2  30.4  27.6     79     0   0       5   270      3 W&nbsp;       113.
+4 04-01-1…  24.6  30.3  27.4     82    26   2.6     3   270      2 SE       113.
+5 05-01-1…  24.7  31    28.5     77     0   0       3   135      2 SE       113.
+6 06-01-1…  23.4  30.8  26.8     85     6   2.9     5   270      1 W&nbsp;       113.
+# ℹ 2 more variables: lat &lt;dbl&gt;, elevasi &lt;dbl&gt;</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-4-2">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href=""></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb12-2"><a href=""></a>dats <span class="op">=</span> pd.read_excel(<span class="st">"data/BMKG-Jawa.xlsx"</span>, sheet_name <span class="op">=</span> <span class="dv">1</span>)</span>
+<span id="cb12-3"><a href=""></a>dats.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      Tanggal    Tn    Tx  Tavg  ...  ddd_car       lon     lat  elevasi
+0  01-01-1975  23.6  29.4  25.9  ...       S&nbsp;  112.6578 -5.8511        3
+1  02-01-1975  25.0  30.4  27.9  ...       SW  112.6578 -5.8511        3
+2  03-01-1975  23.2  30.4  27.6  ...       W&nbsp;  112.6578 -5.8511        3
+3  04-01-1975  24.6  30.3  27.4  ...       SE  112.6578 -5.8511        3
+4  05-01-1975  24.7  31.0  28.5  ...       SE  112.6578 -5.8511        3
+
+[5 rows x 14 columns]</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<ul>
+<li>Jika Anda lihat pada bagian kolom <code>Tanggal</code>, tipenya masih berupa karakter (<code>chr</code> di R atau <code>object</code> di Python). Format tanggalnya adalah <code>dd-mm-yyyy</code>.</li>
+</ul>
+<div class="panel-tabset">
+<ul id="tabset-5" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-5-1">Python</a></li></ul>
+<div class="tab-content">
+<div id="tabset-5-1">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href=""></a>dats.dtypes</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Tanggal     object
+Tn         float64
+Tx         float64
+Tavg       float64
+RH_avg       int64
+RR         float64
+ss         float64
+ff_x         int64
+ddd_x        int64
+ff_avg       int64
+ddd_car     object
+lon        float64
+lat        float64
+elevasi      int64
+dtype: object</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="pra-proses-pengolahan-data-iklim-2" class="slide level2">
+<h2>Pra-Proses Pengolahan Data Iklim (2)</h2>
+<ul>
+<li>Untuk mengubah tipe data pada kolom <code>Tanggal</code> menjadi tipe <em>date</em>, Anda dapat menggunakan perintah ini</li>
+</ul>
+<div class="panel-tabset">
+<ul id="tabset-6" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-6-1">R</a></li><li><a href="#tabset-6-2">Python</a></li></ul>
+<div class="tab-content">
+<div id="tabset-6-1">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href=""></a>dats <span class="ot">&lt;-</span> dats <span class="sc">%&gt;%</span></span>
+<span id="cb16-2"><a href=""></a>  <span class="fu">mutate</span>(<span class="at">Tanggal =</span> <span class="fu">as.Date</span>(Tanggal, <span class="at">format =</span> <span class="st">'%d-%m-%Y'</span>))</span>
+<span id="cb16-3"><a href=""></a><span class="fu">head</span>(dats)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 14
+  Tanggal       Tn    Tx  Tavg RH_avg    RR    ss  ff_x ddd_x ff_avg ddd_car
+  &lt;date&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;  
+1 1975-01-01  23.6  29.4  25.9     84     6   2.7     3   180      1 S&nbsp;     
+2 1975-01-02  25    30.4  27.9     78     6   2.1     4   225      3 SW     
+3 1975-01-03  23.2  30.4  27.6     79     0   0       5   270      3 W&nbsp;     
+4 1975-01-04  24.6  30.3  27.4     82    26   2.6     3   270      2 SE     
+5 1975-01-05  24.7  31    28.5     77     0   0       3   135      2 SE     
+6 1975-01-06  23.4  30.8  26.8     85     6   2.9     5   270      1 W&nbsp;     
+# ℹ 3 more variables: lon &lt;dbl&gt;, lat &lt;dbl&gt;, elevasi &lt;dbl&gt;</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-6-2">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href=""></a>dats[<span class="st">'Tanggal'</span>] <span class="op">=</span> pd.to_datetime(dats[<span class="st">'Tanggal'</span>], <span class="bu">format</span><span class="op">=</span><span class="st">"</span><span class="sc">%d</span><span class="st">-%m-%Y"</span>)</span>
+<span id="cb18-2"><a href=""></a>dats.dtypes</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Tanggal    datetime64[ns]
+Tn                float64
+Tx                float64
+Tavg              float64
+RH_avg              int64
+RR                float64
+ss                float64
+ff_x                int64
+ddd_x               int64
+ff_avg              int64
+ddd_car            object
+lon               float64
+lat               float64
+elevasi             int64
+dtype: object</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<ul>
+<li>Oleh karena data observasi BMKG memiliki kode 8888 dan 9999, nilai tersebut diubah menjadi <code>NA</code></li>
+</ul>
+<div class="panel-tabset">
+<ul id="tabset-7" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-7-1">R</a></li><li><a href="#tabset-7-2">Python</a></li></ul>
+<div class="tab-content">
+<div id="tabset-7-1">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href=""></a>dats <span class="ot">&lt;-</span> dats <span class="sc">%&gt;%</span> </span>
+<span id="cb20-2"><a href=""></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(dats), <span class="cf">function</span>(x) <span class="fu">if_else</span>(x <span class="sc">==</span> <span class="dv">8888</span> <span class="sc">|</span> x <span class="sc">==</span> <span class="dv">9999</span>, <span class="cn">NA</span>, x)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<div id="tabset-7-2">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href=""></a><span class="im">from</span> numpy <span class="im">import</span> nan</span>
+<span id="cb21-2"><a href=""></a>dats.replace([<span class="fl">8888.0</span>, <span class="fl">9999.0</span>], nan, inplace<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
+<ul>
+<li>Kemudian, data observasi harian diubah menjadi data bulanan dengan kolom yang dipilih misalkan <code>Tanggal</code>, <code>Lokasi</code>, <code>Tavg</code>, dan <code>RR</code></li>
+</ul>
+<div class="panel-tabset">
+<ul id="tabset-8" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-8-1">R</a></li><li><a href="#tabset-8-2">Python</a></li></ul>
+<div class="tab-content">
+<div id="tabset-8-1">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href=""></a>dats <span class="ot">&lt;-</span> dats <span class="sc">%&gt;%</span></span>
+<span id="cb22-2"><a href=""></a>  <span class="fu">group_by</span>(<span class="at">Tahun =</span> <span class="fu">year</span>(Tanggal), <span class="at">Bulan =</span> <span class="fu">month</span>(Tanggal)) <span class="sc">%&gt;%</span></span>
+<span id="cb22-3"><a href=""></a>  <span class="fu">summarise</span>(<span class="at">Tavg =</span> <span class="fu">mean</span>(Tavg, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="at">RR =</span> <span class="fu">sum</span>(RR, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb22-4"><a href=""></a>  <span class="fu">mutate</span>(<span class="at">Bulan =</span> <span class="fu">make_date</span>(Tahun, Bulan))</span>
+<span id="cb22-5"><a href=""></a><span class="fu">head</span>(dats)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 4
+# Groups:   Tahun [1]
+  Tahun Bulan       Tavg    RR
+  &lt;dbl&gt; &lt;date&gt;     &lt;dbl&gt; &lt;dbl&gt;
+1  1975 1975-01-01  26.7   349
+2  1975 1975-02-01  26.7   369
+3  1975 1975-03-01  26.7   369
+4  1975 1975-04-01  27.1   190
+5  1975 1975-05-01  27.3   207
+6  1975 1975-06-01  27.2    55</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-8-2">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href=""></a>dats <span class="op">=</span> dats.groupby([</span>
+<span id="cb24-2"><a href=""></a>    dats[<span class="st">'Tanggal'</span>].dt.year.rename(<span class="st">'Year'</span>), </span>
+<span id="cb24-3"><a href=""></a>    dats[<span class="st">'Tanggal'</span>].dt.month.rename(<span class="st">'Month'</span>)</span>
+<span id="cb24-4"><a href=""></a>]).agg({<span class="st">'Tavg'</span>: <span class="st">'mean'</span>, <span class="st">'RR'</span>: <span class="st">'sum'</span>})</span>
+<span id="cb24-5"><a href=""></a>dats <span class="op">=</span> dats.reset_index()</span>
+<span id="cb24-6"><a href=""></a>dats[<span class="st">'Bulan'</span>] <span class="op">=</span> pd.to_datetime(dats[[<span class="st">'Year'</span>, <span class="st">'Month'</span>]].assign(Day<span class="op">=</span><span class="dv">1</span>))</span>
+<span id="cb24-7"><a href=""></a>dats.drop(columns<span class="op">=</span>[<span class="st">'Year'</span>, <span class="st">'Month'</span>], inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb24-8"><a href=""></a>dats.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        Tavg     RR      Bulan
+0  26.651613  349.0 1975-01-01
+1  26.707143  369.0 1975-02-01
+2  26.719355  369.0 1975-03-01
+3  27.126667  190.0 1975-04-01
+4  27.264516  207.0 1975-05-01</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="pra-proses-pengolahan-data-iklim-3" class="slide level2">
+<h2>Pra-Proses Pengolahan Data Iklim (3)</h2>
+<ul>
+<li>Oleh karena terdapat banyak sheet pada file Excel, maka perlu dilakukan iterasi/perulangan untuk menggabungkan semuanya menjadi satu dataframe.</li>
+<li>Untuk R, fungsi <code>map_dfr()</code> dari package <code>purrr</code> dapat digunakan.</li>
+<li>Untuk python, Anda dapat menggunakan perulangan <code>for</code> untuk menyatukan semua sheet dalam 1 <code>list</code>, kemudian <code>concat</code> dari package <code>pandas</code> untuk menggabungkan semua sheet tersebut ke dalam 1 dataframe sehingga tipe datanya menjadi <code>Dataframe</code>.</li>
+</ul>
+<div class="panel-tabset">
+<ul id="tabset-9" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-9-1">R</a></li><li><a href="#tabset-9-2">Python</a></li></ul>
+<div class="tab-content">
+<div id="tabset-9-1">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href=""></a><span class="fu">library</span>(readxl)</span>
+<span id="cb26-2"><a href=""></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb26-3"><a href=""></a></span>
+<span id="cb26-4"><a href=""></a>sheets <span class="ot">&lt;-</span> <span class="fu">excel_sheets</span>(<span class="st">"data/BMKG-Jawa.xlsx"</span>)</span>
+<span id="cb26-5"><a href=""></a>sheets <span class="ot">&lt;-</span> sheets[<span class="dv">2</span><span class="sc">:</span><span class="fu">length</span>(sheets)] <span class="co"># sheet 1 is metadata</span></span>
+<span id="cb26-6"><a href=""></a>dats <span class="ot">&lt;-</span> <span class="fu">map_dfr</span>(sheets, <span class="sc">~</span>{</span>
+<span id="cb26-7"><a href=""></a>  sheet_name <span class="ot">&lt;-</span> .x</span>
+<span id="cb26-8"><a href=""></a>  sheet_data <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"data/BMKG-Jawa.xlsx"</span>, <span class="at">sheet =</span> .x) <span class="sc">%&gt;%</span></span>
+<span id="cb26-9"><a href=""></a>    <span class="co"># Pilih hanya kolom Tanggal, Tavg, dan RR</span></span>
+<span id="cb26-10"><a href=""></a>    <span class="fu">select</span>(Tanggal, lon, lat, Tavg, RR) <span class="sc">%&gt;%</span></span>
+<span id="cb26-11"><a href=""></a>    <span class="co"># Menambahkan nama stasiun</span></span>
+<span id="cb26-12"><a href=""></a>    <span class="fu">mutate</span>(<span class="at">Lokasi =</span> sheet_name) <span class="sc">%&gt;%</span></span>
+<span id="cb26-13"><a href=""></a>    <span class="co"># Mengubah kolom Tanggal dari tipe chr menjadi date</span></span>
+<span id="cb26-14"><a href=""></a>    <span class="fu">mutate</span>(<span class="at">Tanggal =</span> <span class="fu">as.Date</span>(Tanggal, <span class="at">format =</span> <span class="st">'%d-%m-%Y'</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb26-15"><a href=""></a>    <span class="co"># Mengubah nilai 8888 dan 9999 menjadi NA</span></span>
+<span id="cb26-16"><a href=""></a>    <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(.), <span class="cf">function</span>(x) <span class="fu">if_else</span>(x <span class="sc">==</span> <span class="dv">8888</span> <span class="sc">|</span> x <span class="sc">==</span> <span class="dv">9999</span>, <span class="cn">NA</span>, x)))</span>
+<span id="cb26-17"><a href=""></a>  </span>
+<span id="cb26-18"><a href=""></a>  <span class="fu">return</span>(sheet_data)</span>
+<span id="cb26-19"><a href=""></a>})</span>
+<span id="cb26-20"><a href=""></a></span>
+<span id="cb26-21"><a href=""></a>dats</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 420,343 × 6
+   Tanggal      lon   lat  Tavg    RR Lokasi           
+   &lt;date&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;            
+ 1 1975-01-01  113. -5.85  25.9     6 StaMet_Sangkapura
+ 2 1975-01-02  113. -5.85  27.9     6 StaMet_Sangkapura
+ 3 1975-01-03  113. -5.85  27.6     0 StaMet_Sangkapura
+ 4 1975-01-04  113. -5.85  27.4    26 StaMet_Sangkapura
+ 5 1975-01-05  113. -5.85  28.5     0 StaMet_Sangkapura
+ 6 1975-01-06  113. -5.85  26.8     6 StaMet_Sangkapura
+ 7 1975-01-07  113. -5.85  26.9     6 StaMet_Sangkapura
+ 8 1975-01-08  113. -5.85  26.2    11 StaMet_Sangkapura
+ 9 1975-01-09  113. -5.85  27.6     3 StaMet_Sangkapura
+10 1975-01-10  113. -5.85  25.4     7 StaMet_Sangkapura
+# ℹ 420,333 more rows</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-9-2">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href=""></a><span class="co"># Initialize an empty dataframe</span></span>
+<span id="cb28-2"><a href=""></a>dats <span class="op">=</span> []</span>
+<span id="cb28-3"><a href=""></a></span>
+<span id="cb28-4"><a href=""></a><span class="co"># Read each sheet in the file</span></span>
+<span id="cb28-5"><a href=""></a>sheets <span class="op">=</span> pd.read_excel(<span class="st">"data/BMKG-Jawa.xlsx"</span>, sheet_name<span class="op">=</span><span class="va">None</span>)</span>
+<span id="cb28-6"><a href=""></a></span>
+<span id="cb28-7"><a href=""></a><span class="co"># Iterate through each sheet</span></span>
+<span id="cb28-8"><a href=""></a><span class="cf">for</span> sheet_name, sheet_data <span class="kw">in</span> sheets.items():</span>
+<span id="cb28-9"><a href=""></a>  <span class="co"># Skip the first sheet (metadata)</span></span>
+<span id="cb28-10"><a href=""></a>  <span class="cf">if</span> sheet_name.lower() <span class="op">==</span> <span class="st">'metadata'</span>:</span>
+<span id="cb28-11"><a href=""></a>    <span class="cf">continue</span></span>
+<span id="cb28-12"><a href=""></a>  </span>
+<span id="cb28-13"><a href=""></a>  <span class="co"># Add the sheet name as a column</span></span>
+<span id="cb28-14"><a href=""></a>  sheet_data[<span class="st">'Lokasi'</span>] <span class="op">=</span> sheet_name</span>
+<span id="cb28-15"><a href=""></a>  </span>
+<span id="cb28-16"><a href=""></a>  <span class="co"># Select only the 'Tanggal', 'Tavg', and 'RR' columns</span></span>
+<span id="cb28-17"><a href=""></a>  sheet_data <span class="op">=</span> sheet_data[[<span class="st">'Tanggal'</span>, <span class="st">'Lokasi'</span>, <span class="st">'lon'</span>, <span class="st">'lat'</span>, <span class="st">'Tavg'</span>, <span class="st">'RR'</span>]]</span>
+<span id="cb28-18"><a href=""></a></span>
+<span id="cb28-19"><a href=""></a>  <span class="co"># Convert the 'Tanggal' column to datetime</span></span>
+<span id="cb28-20"><a href=""></a>  sheet_data[<span class="st">'Tanggal'</span>] <span class="op">=</span> pd.to_datetime(sheet_data[<span class="st">'Tanggal'</span>], <span class="bu">format</span><span class="op">=</span><span class="st">'</span><span class="sc">%d</span><span class="st">-%m-%Y'</span>)</span>
+<span id="cb28-21"><a href=""></a>  </span>
+<span id="cb28-22"><a href=""></a>  <span class="co"># Replace 8888 and 9999 with NaN</span></span>
+<span id="cb28-23"><a href=""></a>  sheet_data.replace([<span class="dv">8888</span>, <span class="dv">9999</span>], nan, inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb28-24"><a href=""></a></span>
+<span id="cb28-25"><a href=""></a>  <span class="co"># Append the sheet data to the main dataframe</span></span>
+<span id="cb28-26"><a href=""></a>  dats.append(sheet_data)</span>
+<span id="cb28-27"><a href=""></a></span>
+<span id="cb28-28"><a href=""></a><span class="co"># Concatenate all the dataframes in the list</span></span>
+<span id="cb28-29"><a href=""></a>dats <span class="op">=</span> pd.concat(dats)</span>
+<span id="cb28-30"><a href=""></a>dats</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         Tanggal             Lokasi        lon      lat  Tavg    RR
+0     1975-01-01  StaMet_Sangkapura  112.65780 -5.85110  25.9   6.0
+1     1975-01-02  StaMet_Sangkapura  112.65780 -5.85110  27.9   6.0
+2     1975-01-03  StaMet_Sangkapura  112.65780 -5.85110  27.6   0.0
+3     1975-01-04  StaMet_Sangkapura  112.65780 -5.85110  27.4  26.0
+4     1975-01-05  StaMet_Sangkapura  112.65780 -5.85110  28.5   0.0
+...          ...                ...        ...      ...   ...   ...
+14240 2018-12-27    HalimPK_Jakarta  106.88926 -6.27036  28.0   NaN
+14241 2018-12-28    HalimPK_Jakarta  106.88926 -6.27036  28.5   NaN
+14242 2018-12-29    HalimPK_Jakarta  106.88926 -6.27036  28.7   NaN
+14243 2018-12-30    HalimPK_Jakarta  106.88926 -6.27036  30.0   NaN
+14244 2018-12-31    HalimPK_Jakarta  106.88926 -6.27036  28.2   9.9
+
+[420343 rows x 6 columns]</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="pra-proses-pengolahan-data-iklim-4" class="slide level2">
+<h2>Pra-Proses Pengolahan Data Iklim (4)</h2>
+<ul>
+<li>Di tahapan ini, Anda dapat mencari jumlah data yang hilang untuk semua lokasi stasiun</li>
+</ul>
+<div class="panel-tabset">
+<ul id="tabset-10" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-10-1">R</a></li><li><a href="#tabset-10-2">Python</a></li></ul>
+<div class="tab-content">
+<div id="tabset-10-1">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href=""></a>dats_miss <span class="ot">&lt;-</span> dats <span class="sc">%&gt;%</span></span>
+<span id="cb30-2"><a href=""></a>  <span class="fu">group_by</span>(Lokasi, lon, lat) <span class="sc">%&gt;%</span></span>
+<span id="cb30-3"><a href=""></a>  <span class="fu">summarise</span>(<span class="at">missing_Tavg =</span> <span class="fu">sum</span>(<span class="fu">is.na</span>(Tavg)), <span class="at">missing_RR =</span> <span class="fu">sum</span>(<span class="fu">is.na</span>(RR)))</span>
+<span id="cb30-4"><a href=""></a>dats_miss</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 31 × 5
+# Groups:   Lokasi, lon [31]
+   Lokasi                 lon   lat missing_Tavg missing_RR
+   &lt;chr&gt;                &lt;dbl&gt; &lt;dbl&gt;        &lt;int&gt;      &lt;int&gt;
+ 1 HalimPK_Jakarta       107. -6.27         8841      10358
+ 2 StaGeof_Bandung       108. -6.88          160       1582
+ 3 StaGeof_Banjarnegara  110. -7.33         3038       2005
+ 4 StaGeof_Malang        112. -8.15          260       1450
+ 5 StaGeof_Nganjuk       112. -7.73         2409       4258
+ 6 StaGeof_Pasuruan      113. -7.70          719       1991
+ 7 StaGeof_Sleman        110. -7.82          902       1226
+ 8 StaGeof_Tangerang     106. -6.1            42        928
+ 9 StaKlim_Banten        107. -6.26         1069       2620
+10 StaKlim_JawaBarat     107. -6.5           201       2029
+# ℹ 21 more rows</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-10-2">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href=""></a>dats_miss <span class="op">=</span> dats.groupby([<span class="st">'Lokasi'</span>, <span class="st">'lon'</span>, <span class="st">'lat'</span>]).agg({</span>
+<span id="cb32-2"><a href=""></a>    <span class="st">'Tavg'</span>: <span class="kw">lambda</span> x: x.isna().<span class="bu">sum</span>(),</span>
+<span id="cb32-3"><a href=""></a>    <span class="st">'RR'</span>: <span class="kw">lambda</span> x: x.isna().<span class="bu">sum</span>()</span>
+<span id="cb32-4"><a href=""></a>}).reset_index()</span>
+<span id="cb32-5"><a href=""></a>dats_miss.columns <span class="op">=</span> [<span class="st">'Lokasi'</span>, <span class="st">'lon'</span>, <span class="st">'lat'</span>, <span class="st">'missing_Tavg'</span>, <span class="st">'missing_RR'</span>]</span>
+<span id="cb32-6"><a href=""></a>dats_miss</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                    Lokasi        lon      lat  missing_Tavg  missing_RR
+0          HalimPK_Jakarta  106.88926 -6.27036          8841       10358
+1          StaGeof_Bandung  107.59733 -6.88356           160        1582
+2     StaGeof_Banjarnegara  109.70690 -7.33300          3038        2005
+3           StaGeof_Malang  112.45000 -8.15000           260        1450
+4          StaGeof_Nganjuk  111.76682 -7.73486          2409        4258
+5         StaGeof_Pasuruan  112.63533 -7.70456           719        1991
+6           StaGeof_Sleman  110.30000 -7.82000           902        1226
+7        StaGeof_Tangerang  106.38000 -6.10000            42         928
+8           StaKlim_Banten  106.75084 -6.26151          1069        2620
+9        StaKlim_JawaBarat  106.75000 -6.50000           201        2029
+10      StaKlim_JawaTengah  110.38120 -6.98470         11541       12379
+11       StaKlim_JawaTimur  112.59790 -7.90080           793         499
+12      StaKlim_Yogyakarta  110.35400 -7.73100            44         234
+13        StaMetMar_Serang  106.11000 -6.11185         11391       12280
+14   StaMetMar_TanjungEmas  110.41990 -6.94860           416        1196
+15  StaMetMar_TanjungPerak  112.73530 -7.20530           330        1373
+16  StaMetMar_TanjungPriok  106.88053 -6.10781           367        1683
+17         StaMetMar_Tegal  109.12103 -6.86817           631        1683
+18        StaMet_AhmadYani  110.37780 -6.97683         11556       12123
+19       StaMet_Banyuwangi  114.35530 -8.21500           513        2147
+20         StaMet_Budiarto  106.56389 -6.28670          1578        3309
+21           StaMet_Citeko  106.85000 -6.70000           247         733
+22           StaMet_Juanda  112.78330 -7.38460           272        1191
+23        StaMet_Kemayoran  106.84000 -6.15559          4317        1329
+24        StaMet_Kertajati  108.26300 -6.73440           190         491
+25            StaMet_Perak  112.72390 -7.22360         11278       12177
+26       StaMet_Sangkapura  112.65780 -5.85110           188        2495
+27    StaMet_SoekarnoHatta  106.65000 -6.12000           113         716
+28        StaMet_Trunojoyo  113.91400 -7.03976           396        1156
+29            StaMet_Tuban  111.99177 -6.82290            26         679
+30    StaMet_TunggulWulung  109.01490 -7.71890           254        2616</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<ul>
+<li>Selanjutnya, Anda dapat menghitung rata-rata bulanan curah hujan dan suhu udara di setiap lokasi stasiun pengamatan</li>
+</ul>
+<div class="panel-tabset">
+<ul id="tabset-11" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-11-1">R</a></li><li><a href="#tabset-11-2">Python</a></li></ul>
+<div class="tab-content">
+<div id="tabset-11-1">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href=""></a>dats_monthly <span class="ot">&lt;-</span> dats <span class="sc">%&gt;%</span></span>
+<span id="cb34-2"><a href=""></a>  <span class="fu">group_by</span>(<span class="at">Tahun =</span> <span class="fu">year</span>(Tanggal), <span class="at">Bulan =</span> <span class="fu">month</span>(Tanggal), Lokasi, lon, lat) <span class="sc">%&gt;%</span></span>
+<span id="cb34-3"><a href=""></a>  <span class="fu">summarise</span>(<span class="at">Tavg =</span> <span class="fu">mean</span>(Tavg, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="at">RR =</span> <span class="fu">sum</span>(RR, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb34-4"><a href=""></a>  <span class="fu">mutate</span>(<span class="at">Bulan =</span> <span class="fu">make_date</span>(Tahun, Bulan)) <span class="sc">%&gt;%</span></span>
+<span id="cb34-5"><a href=""></a>  <span class="fu">select</span>(Bulan, Lokasi, lon, lat, Tavg, RR)</span>
+<span id="cb34-6"><a href=""></a>dats_monthly</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 13,835 × 7
+# Groups:   Tahun, Bulan, Lokasi, lon [13,835]
+   Tahun Bulan      Lokasi                   lon   lat  Tavg    RR
+   &lt;dbl&gt; &lt;date&gt;     &lt;chr&gt;                  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+ 1  1975 1975-01-01 StaGeof_Bandung         108. -6.88  22.5 200. 
+ 2  1975 1975-01-01 StaKlim_JawaTengah      110. -6.98  26.7 220  
+ 3  1975 1975-01-01 StaMetMar_TanjungPriok  107. -6.11  27.3  64.4
+ 4  1975 1975-01-01 StaMet_Budiarto         107. -6.29  25.9 257  
+ 5  1975 1975-01-01 StaMet_Perak            113. -7.22  26.9 206. 
+ 6  1975 1975-01-01 StaMet_Sangkapura       113. -5.85  26.7 349  
+ 7  1975 1975-01-01 StaMet_TunggulWulung    109. -7.72  26.5 202  
+ 8  1975 1975-02-01 StaGeof_Bandung         108. -6.88  22.4 190  
+ 9  1975 1975-02-01 StaKlim_JawaTengah      110. -6.98  26.4 222. 
+10  1975 1975-02-01 StaMetMar_TanjungPriok  107. -6.11  26.6 285. 
+# ℹ 13,825 more rows</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-11-2">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href=""></a>dats_monthly <span class="op">=</span> dats.groupby([</span>
+<span id="cb36-2"><a href=""></a>    dats[<span class="st">'Tanggal'</span>].dt.year.rename(<span class="st">'Year'</span>), </span>
+<span id="cb36-3"><a href=""></a>    dats[<span class="st">'Tanggal'</span>].dt.month.rename(<span class="st">'Month'</span>), </span>
+<span id="cb36-4"><a href=""></a>    <span class="st">'Lokasi'</span>, <span class="st">'lon'</span>, <span class="st">'lat'</span></span>
+<span id="cb36-5"><a href=""></a>]).agg({<span class="st">'Tavg'</span>: <span class="st">'mean'</span>, <span class="st">'RR'</span>: <span class="st">'sum'</span>}).reset_index()</span>
+<span id="cb36-6"><a href=""></a>dats_monthly[<span class="st">'Bulan'</span>] <span class="op">=</span> pd.to_datetime(dats_monthly[[<span class="st">'Year'</span>, <span class="st">'Month'</span>]].assign(Day<span class="op">=</span><span class="dv">1</span>))</span>
+<span id="cb36-7"><a href=""></a>dats_monthly.drop(columns<span class="op">=</span>[<span class="st">'Year'</span>, <span class="st">'Month'</span>], inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb36-8"><a href=""></a>dats_monthly</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                       Lokasi        lon      lat       Tavg     RR      Bulan
+0             StaGeof_Bandung  107.59733 -6.88356  22.545161  199.5 1975-01-01
+1          StaKlim_JawaTengah  110.38120 -6.98470  26.703226  220.0 1975-01-01
+2      StaMetMar_TanjungPriok  106.88053 -6.10781  27.264516   64.4 1975-01-01
+3             StaMet_Budiarto  106.56389 -6.28670  25.904000  257.0 1975-01-01
+4                StaMet_Perak  112.72390 -7.22360  26.925806  206.1 1975-01-01
+...                       ...        ...      ...        ...    ...        ...
+13805       StaMet_Sangkapura  112.65780 -5.85110  27.667742  575.9 2022-12-01
+13806    StaMet_SoekarnoHatta  106.65000 -6.12000  27.270968   94.9 2022-12-01
+13807        StaMet_Trunojoyo  113.91400 -7.03976  28.293333   89.8 2022-12-01
+13808            StaMet_Tuban  111.99177 -6.82290  27.458065  296.0 2022-12-01
+13809    StaMet_TunggulWulung  109.01490 -7.71890  27.293548  407.2 2022-12-01
+
+[13810 rows x 6 columns]</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="explorative-data-analysis-eda-iklim-1" class="slide level2">
+<h2>Explorative Data Analysis (EDA) Iklim (1)</h2>
+<ul>
+<li>EDA adalah tahap analisis data yang bertujuan menemukan pola-pola menarik di dalam data, seperti sebaran, tren, atau anomali</li>
+<li>Ukuran pemusatan data (mean, median, …), ukuran penyebaran data (jarak, standar deviasi, varian, kuantil, …), serta visualisasi data (histogram, boxplot, scatter plot) adalah beberapa metode yang digunakan di dalam EDA</li>
+<li>Pada contoh data iklim Pulau Jawa, misalkan mencari rata-rata curah hujan dan suhu udara bulanan klimatologi (1975 - 2022), serta standar deviasinya di setiap lokasi stasiun pengamatan</li>
+</ul>
+<div class="panel-tabset">
+<ul id="tabset-12" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-12-1">R</a></li><li><a href="#tabset-12-2">Python</a></li></ul>
+<div class="tab-content">
+<div id="tabset-12-1">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href=""></a>dats_mean <span class="ot">&lt;-</span> dats <span class="sc">%&gt;%</span></span>
+<span id="cb38-2"><a href=""></a>  <span class="fu">group_by</span>(Lokasi, lon, lat, <span class="at">Bulan =</span> <span class="fu">month</span>(Tanggal), <span class="at">Tahun =</span> <span class="fu">year</span>(Tanggal)) <span class="sc">%&gt;%</span></span>
+<span id="cb38-3"><a href=""></a>  <span class="fu">summarise</span>(<span class="at">Tavg_av =</span> <span class="fu">mean</span>(Tavg, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="at">RR_av =</span> <span class="fu">sum</span>(RR, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), </span>
+<span id="cb38-4"><a href=""></a>            <span class="at">Tavg_sd =</span> <span class="fu">sd</span>(Tavg, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)  , <span class="at">RR_sd =</span> <span class="fu">sd</span>(RR, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb38-5"><a href=""></a>dats_mean</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 13,835 × 9
+# Groups:   Lokasi, lon, lat, Bulan [397]
+   Lokasi            lon   lat Bulan Tahun Tavg_av RR_av Tavg_sd RR_sd
+   &lt;chr&gt;           &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;
+ 1 HalimPK_Jakarta  107. -6.27     1  1980    25.6   116   0.791 10.0 
+ 2 HalimPK_Jakarta  107. -6.27     1  1981    25.2    80   1.00  22.4 
+ 3 HalimPK_Jakarta  107. -6.27     1  1982    25.2    18   1.08   6.24
+ 4 HalimPK_Jakarta  107. -6.27     1  1983    26.7   108   0.693 22.9 
+ 5 HalimPK_Jakarta  107. -6.27     1  1984    25.4   113   0.591 17.5 
+ 6 HalimPK_Jakarta  107. -6.27     1  1985    25.5   254   1.00  26.1 
+ 7 HalimPK_Jakarta  107. -6.27     1  1986    26.0    65   1.01  18.0 
+ 8 HalimPK_Jakarta  107. -6.27     1  1987    25.4   138   0.967 17.1 
+ 9 HalimPK_Jakarta  107. -6.27     1  1988    26.5    58   0.687 12.2 
+10 HalimPK_Jakarta  107. -6.27     1  1989    25.9   151   0.772 25.6 
+# ℹ 13,825 more rows</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-12-2">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href=""></a>dats_mean <span class="op">=</span> dats.groupby([<span class="st">'Lokasi'</span>, <span class="st">'lon'</span>, <span class="st">'lat'</span>, </span>
+<span id="cb40-2"><a href=""></a>                          dats[<span class="st">'Tanggal'</span>].dt.month.rename(<span class="st">'Year'</span>), </span>
+<span id="cb40-3"><a href=""></a>                          dats[<span class="st">'Tanggal'</span>].dt.year.rename(<span class="st">'Month'</span>)]).agg({</span>
+<span id="cb40-4"><a href=""></a>    <span class="st">'Tavg'</span>: [<span class="st">'mean'</span>, <span class="st">'std'</span>],</span>
+<span id="cb40-5"><a href=""></a>    <span class="st">'RR'</span>: [<span class="st">'sum'</span>, <span class="st">'std'</span>]</span>
+<span id="cb40-6"><a href=""></a>}).reset_index()</span>
+<span id="cb40-7"><a href=""></a>dats_mean.columns <span class="op">=</span> [<span class="st">'Lokasi'</span>, <span class="st">'lon'</span>, <span class="st">'lat'</span>, <span class="st">'Bulan'</span>, <span class="st">'Tahun'</span>, <span class="st">'Tavg_av'</span>, <span class="st">'Tavg_sd'</span>, <span class="st">'RR_av'</span>, <span class="st">'RR_sd'</span>]</span>
+<span id="cb40-8"><a href=""></a>dats_mean</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                     Lokasi        lon      lat  ...   Tavg_sd  RR_av      RR_sd
+0           HalimPK_Jakarta  106.88926 -6.27036  ...  0.790569  116.0  10.042766
+1           HalimPK_Jakarta  106.88926 -6.27036  ...  1.003494   80.0  22.416512
+2           HalimPK_Jakarta  106.88926 -6.27036  ...  1.081665   18.0   6.244998
+3           HalimPK_Jakarta  106.88926 -6.27036  ...  0.692820  108.0  22.897598
+4           HalimPK_Jakarta  106.88926 -6.27036  ...  0.591205  113.0  17.525492
+...                     ...        ...      ...  ...       ...    ...        ...
+13805  StaMet_TunggulWulung  109.01490 -7.71890  ...  0.986437  413.3  43.872042
+13806  StaMet_TunggulWulung  109.01490 -7.71890  ...  0.594328  100.6   6.074112
+13807  StaMet_TunggulWulung  109.01490 -7.71890  ...  0.818167  554.3  22.818018
+13808  StaMet_TunggulWulung  109.01490 -7.71890  ...  0.796977  334.4  16.519542
+13809  StaMet_TunggulWulung  109.01490 -7.71890  ...  0.707076  407.2  22.848947
+
+[13810 rows x 9 columns]</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<ul>
+<li>Anda juga dapat melihat rangkuman dari data iklim dari seluruh lokasi stasiun pengamatan. Setiap fungsi dari python dan R memiliki luaran yang berbeda.</li>
+</ul>
+<div class="panel-tabset">
+<ul id="tabset-13" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-13-1">R</a></li><li><a href="#tabset-13-2">Python</a></li></ul>
+<div class="tab-content">
+<div id="tabset-13-1">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href=""></a><span class="fu">summary</span>(dats)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    Tanggal                lon             lat              Tavg       
+ Min.   :1975-01-01   Min.   :106.1   Min.   :-8.215   Min.   : 15.10  
+ 1st Qu.:1990-11-15   1st Qu.:106.8   1st Qu.:-7.333   1st Qu.: 25.50  
+ Median :2002-05-21   Median :109.1   Median :-6.884   Median : 27.00  
+ Mean   :2001-10-20   Mean   :109.7   Mean   :-6.892   Mean   : 26.48  
+ 3rd Qu.:2013-04-06   3rd Qu.:112.6   3rd Qu.:-6.270   3rd Qu.: 28.10  
+ Max.   :2022-12-31   Max.   :114.4   Max.   :-5.851   Max.   :141.60  
+ NA's   :50                                            NA's   :74082   
+       RR             Lokasi         
+ Min.   :   0.00   Length:420343     
+ 1st Qu.:   0.00   Class :character  
+ Median :   0.00   Mode  :character  
+ Mean   :   7.05                     
+ 3rd Qu.:   6.00                     
+ Max.   :1965.50                     
+ NA's   :100936                      </code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-13-2">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href=""></a>dats.describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                             Tanggal  ...             RR
+count                         420343  ...  319407.000000
+mean   2001-10-20 14:43:52.210361472  ...       7.048726
+min              1975-01-01 00:00:00  ...       0.000000
+25%              1990-11-16 00:00:00  ...       0.000000
+50%              2002-05-20 00:00:00  ...       0.000000
+75%              2013-04-05 00:00:00  ...       6.000000
+max              2022-12-31 00:00:00  ...    1965.500000
+std                              NaN  ...      16.837920
+
+[8 rows x 5 columns]</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="explorative-data-analysis-eda-iklim-2" class="slide level2">
+<h2>Explorative Data Analysis (EDA) Iklim (2)</h2>
+<ul>
+<li>Anda juga dapat menerapkan fungsi lain, seperti <code>quantile</code> (kuartil, persentil, desil, …)</li>
+<li>Pada contoh data iklim Pulau Jawa, misalkan mencari persentil ke-25 dan ke-95 dari curah hujan dan suhu udara bulanan klimatologi (1975 - 2022). Tahapan ini mungkin dapat berguna ketika mencari indeks iklim ekstrem.</li>
+</ul>
+<div class="panel-tabset">
+<ul id="tabset-14" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-14-1">R</a></li><li><a href="#tabset-14-2">Python</a></li></ul>
+<div class="tab-content">
+<div id="tabset-14-1">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href=""></a>dats_quantile <span class="ot">&lt;-</span> dats <span class="sc">%&gt;%</span></span>
+<span id="cb46-2"><a href=""></a>  <span class="fu">group_by</span>(Lokasi, lon, lat, <span class="at">Bulan =</span> <span class="fu">month</span>(Tanggal)) <span class="sc">%&gt;%</span></span>
+<span id="cb46-3"><a href=""></a>  <span class="fu">summarise</span>(<span class="at">Tavg_q25 =</span> <span class="fu">quantile</span>(Tavg, <span class="fl">0.25</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="at">RR_q25 =</span> <span class="fu">quantile</span>(RR, <span class="fl">0.25</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), </span>
+<span id="cb46-4"><a href=""></a>            <span class="at">Tavg_q95 =</span> <span class="fu">quantile</span>(Tavg, <span class="fl">0.95</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="at">RR_q95 =</span> <span class="fu">quantile</span>(RR, <span class="fl">0.95</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb46-5"><a href=""></a>dats_quantile</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 397 × 8
+# Groups:   Lokasi, lon, lat [31]
+   Lokasi            lon   lat Bulan Tavg_q25 RR_q25 Tavg_q95 RR_q95
+   &lt;chr&gt;           &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;
+ 1 HalimPK_Jakarta  107. -6.27     1     25.7    0.5     28.7   53.8
+ 2 HalimPK_Jakarta  107. -6.27     2     26      0.3     28.2   55.1
+ 3 HalimPK_Jakarta  107. -6.27     3     26.6    0       28.9   42.4
+ 4 HalimPK_Jakarta  107. -6.27     4     26.8    0       29.2   42  
+ 5 HalimPK_Jakarta  107. -6.27     5     27.1    0       29     41.7
+ 6 HalimPK_Jakarta  107. -6.27     6     26.9    0       28.7   31.2
+ 7 HalimPK_Jakarta  107. -6.27     7     26.7    0       28.4   25.2
+ 8 HalimPK_Jakarta  107. -6.27     8     26.8    0       28.6   22  
+ 9 HalimPK_Jakarta  107. -6.27     9     27.2    0       29.1   23  
+10 HalimPK_Jakarta  107. -6.27    10     27.1    0       29.7   41.2
+# ℹ 387 more rows</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-14-2">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href=""></a>dats_quantile <span class="op">=</span> dats.groupby([</span>
+<span id="cb48-2"><a href=""></a>  <span class="st">'Lokasi'</span>, <span class="st">'lon'</span>, <span class="st">'lat'</span>, dats[<span class="st">'Tanggal'</span>].dt.month]).agg({</span>
+<span id="cb48-3"><a href=""></a>    <span class="st">'Tavg'</span>: [<span class="kw">lambda</span> x: x.quantile(<span class="fl">0.25</span>), <span class="kw">lambda</span> x: x.quantile(<span class="fl">0.95</span>)],</span>
+<span id="cb48-4"><a href=""></a>    <span class="st">'RR'</span>  : [<span class="kw">lambda</span> x: x.quantile(<span class="fl">0.25</span>), <span class="kw">lambda</span> x: x.quantile(<span class="fl">0.95</span>)]</span>
+<span id="cb48-5"><a href=""></a>  }).reset_index()</span>
+<span id="cb48-6"><a href=""></a>dats_quantile.columns <span class="op">=</span> [<span class="st">'Lokasi'</span>, <span class="st">'lon'</span>, <span class="st">'lat'</span>, <span class="st">'Bulan'</span>, <span class="st">'Tavg_q25'</span>, <span class="st">'Tavg_q95'</span>, <span class="st">'RR_q25'</span>, <span class="st">'RR_q95'</span>]</span>
+<span id="cb48-7"><a href=""></a>dats_quantile</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                   Lokasi        lon      lat  ...  Tavg_q95  RR_q25  RR_q95
+0         HalimPK_Jakarta  106.88926 -6.27036  ...     28.70   0.500  53.760
+1         HalimPK_Jakarta  106.88926 -6.27036  ...     28.20   0.300  55.100
+2         HalimPK_Jakarta  106.88926 -6.27036  ...     28.90   0.000  42.380
+3         HalimPK_Jakarta  106.88926 -6.27036  ...     29.23   0.000  42.000
+4         HalimPK_Jakarta  106.88926 -6.27036  ...     29.00   0.000  41.650
+..                    ...        ...      ...  ...       ...     ...     ...
+367  StaMet_TunggulWulung  109.01490 -7.71890  ...     27.30   0.000  19.500
+368  StaMet_TunggulWulung  109.01490 -7.71890  ...     27.60   0.000  41.900
+369  StaMet_TunggulWulung  109.01490 -7.71890  ...     28.00   0.000  67.125
+370  StaMet_TunggulWulung  109.01490 -7.71890  ...     28.60   0.400  79.240
+371  StaMet_TunggulWulung  109.01490 -7.71890  ...     28.70   0.425  65.555
+
+[372 rows x 8 columns]</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="spasialisasi-data-iklim-1" class="slide level2">
+<h2>Spasialisasi Data Iklim (1)</h2>
+<ul>
+<li>Spasialisasi data iklim adalah proses mengubah data yang bersifat titik menjadi data yang bersifat grid dengan beberapa metode tertentu, contohnya polygon thiessen, inverse distance weighting, kriging, dan metode lainnya.</li>
+<li>Tujuannya adalah untuk memperoleh data yang lebih representatif di suatu wilayah tertentu.</li>
+<li>Hanya saja, metode ini memiliki kelemahan, yaitu membutuhkan data yang lengkap dan homogen di setiap lokasi pengamatan.</li>
+<li>Selain itu, keterbatasan data observasi, seperti data kosong, juga dapat mempengaruhi hasil.</li>
+<li>Data iklim Pulau Jawa yang telah kami sediakan memiliki data kosong di beberapa lokasi pengamatan.</li>
+<li>Contoh dalam tutorial ini, metode IDW dan Ordinary Kriging akan digunakan untuk menginterpolasi data curah hujan bulanan di Pulau Jawa pada bulan Januari di tahun 2019 dan 2022 dengan menggunakan variabel <code>dats_monthly</code> yang telah dihitung sebelumnya.</li>
+<li>Package R: <code>gstat</code>, <code>sf</code> dan <code>raster</code> dan package Python: <code>geopandas</code> dan <code>rioxarray</code> akan digunakan untuk menginterpolasi data ini.</li>
+</ul>
+</section>
+<section id="spasialisasi-data-iklim-2" class="slide level2">
+<h2>Spasialisasi Data Iklim (2)</h2>
+<div class="panel-tabset">
+<ul id="tabset-15" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-15-1">R</a></li><li><a href="#tabset-15-2">Python</a></li></ul>
+<div class="tab-content">
+<div id="tabset-15-1">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href=""></a><span class="fu">library</span>(gstat)</span>
+<span id="cb50-2"><a href=""></a><span class="fu">library</span>(raster)</span>
+<span id="cb50-3"><a href=""></a><span class="fu">library</span>(sf)</span>
+<span id="cb50-4"><a href=""></a><span class="fu">library</span>(tmap)</span>
+<span id="cb50-5"><a href=""></a></span>
+<span id="cb50-6"><a href=""></a><span class="fu">tmap_options</span>(<span class="at">check.and.fix =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb50-7"><a href=""></a></span>
+<span id="cb50-8"><a href=""></a><span class="co"># Filter Bulan: Januari 2019 &amp; 2022</span></span>
+<span id="cb50-9"><a href=""></a>dats_monthly_jan <span class="ot">&lt;-</span> dats_monthly <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="fu">month</span>(Bulan) <span class="sc">==</span> <span class="dv">1</span> <span class="sc">&amp;</span> <span class="fu">year</span>(Bulan) <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">2019</span>, <span class="dv">2022</span>))</span>
+<span id="cb50-10"><a href=""></a>dats_jan_2019 <span class="ot">&lt;-</span> dats_monthly_jan <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Tahun <span class="sc">==</span> <span class="dv">2019</span>)</span>
+<span id="cb50-11"><a href=""></a>dats_jan_2022 <span class="ot">&lt;-</span> dats_monthly_jan <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Tahun <span class="sc">==</span> <span class="dv">2022</span>)</span>
+<span id="cb50-12"><a href=""></a></span>
+<span id="cb50-13"><a href=""></a><span class="co"># Convert dataframe to SpatialPointsDataFrames</span></span>
+<span id="cb50-14"><a href=""></a><span class="fu">coordinates</span>(dats_jan_2019) <span class="ot">&lt;-</span> <span class="er">~</span>lon <span class="sc">+</span> lat</span>
+<span id="cb50-15"><a href=""></a><span class="fu">coordinates</span>(dats_jan_2022) <span class="ot">&lt;-</span> <span class="er">~</span>lon <span class="sc">+</span> lat</span>
+<span id="cb50-16"><a href=""></a></span>
+<span id="cb50-17"><a href=""></a><span class="co"># Make an empty grid with the same extent as the data and resolution set to 0.05</span></span>
+<span id="cb50-18"><a href=""></a>res <span class="ot">&lt;-</span> <span class="fl">0.05</span></span>
+<span id="cb50-19"><a href=""></a>empty_grd <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_make_grid</span>(dats_jan_2019_sf, <span class="at">what =</span> <span class="st">'centers'</span>, <span class="at">cellsize =</span> <span class="fl">0.05</span>, <span class="at">crs =</span> <span class="dv">4328</span>)</span>
+<span id="cb50-20"><a href=""></a></span>
+<span id="cb50-21"><a href=""></a><span class="co"># Do the IDW calculation</span></span>
+<span id="cb50-22"><a href=""></a>power <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb50-23"><a href=""></a>idw_jan2019 <span class="ot">&lt;-</span> <span class="fu">idw</span>(RR <span class="sc">~</span> <span class="dv">1</span>, dats_jan_2019_sf, <span class="at">newdata =</span> empty_grd, <span class="at">idp =</span> power)</span>
+<span id="cb50-24"><a href=""></a>idw_jan2022 <span class="ot">&lt;-</span> <span class="fu">idw</span>(RR <span class="sc">~</span> <span class="dv">1</span>, dats_jan_2022_sf, <span class="at">newdata =</span> empty_grd, <span class="at">idp =</span> power)</span>
+<span id="cb50-25"><a href=""></a></span>
+<span id="cb50-26"><a href=""></a><span class="co"># Assign coordinates to the IDW result</span></span>
+<span id="cb50-27"><a href=""></a>idw_jan2019 <span class="ot">&lt;-</span> idw_jan2019 <span class="sc">%&gt;%</span></span>
+<span id="cb50-28"><a href=""></a>  <span class="fu">mutate</span>(<span class="at">lon =</span> <span class="fu">st_coordinates</span>(idw_jan2019)[, <span class="dv">1</span>], </span>
+<span id="cb50-29"><a href=""></a>         <span class="at">lat =</span> <span class="fu">st_coordinates</span>(idw_jan2019)[, <span class="dv">2</span>])</span>
+<span id="cb50-30"><a href=""></a></span>
+<span id="cb50-31"><a href=""></a>idw_jan2022 <span class="ot">&lt;-</span> idw_jan2022 <span class="sc">%&gt;%</span></span>
+<span id="cb50-32"><a href=""></a>  <span class="fu">mutate</span>(<span class="at">lon =</span> <span class="fu">st_coordinates</span>(idw_jan2022)[, <span class="dv">1</span>], </span>
+<span id="cb50-33"><a href=""></a>         <span class="at">lat =</span> <span class="fu">st_coordinates</span>(idw_jan2022)[, <span class="dv">2</span>])</span>
+<span id="cb50-34"><a href=""></a></span>
+<span id="cb50-35"><a href=""></a><span class="co"># Sort lat descending and lon ascending</span></span>
+<span id="cb50-36"><a href=""></a><span class="co"># This because of raster package requires the data to be sorted in this way</span></span>
+<span id="cb50-37"><a href=""></a><span class="co"># From the up left corner to the bottom right corner</span></span>
+<span id="cb50-38"><a href=""></a>idw_jan2019 <span class="ot">&lt;-</span> idw_jan2019 <span class="sc">%&gt;%</span></span>
+<span id="cb50-39"><a href=""></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(lat)) <span class="sc">%&gt;%</span></span>
+<span id="cb50-40"><a href=""></a>  <span class="fu">arrange</span>(lon)</span>
+<span id="cb50-41"><a href=""></a>idw_jan2022 <span class="ot">&lt;-</span> idw_jan2022 <span class="sc">%&gt;%</span></span>
+<span id="cb50-42"><a href=""></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(lat)) <span class="sc">%&gt;%</span></span>
+<span id="cb50-43"><a href=""></a>  <span class="fu">arrange</span>(lon)</span>
+<span id="cb50-44"><a href=""></a></span>
+<span id="cb50-45"><a href=""></a><span class="co"># convert to matrix which has ncell = lon * lat</span></span>
+<span id="cb50-46"><a href=""></a>lon <span class="ot">&lt;-</span> <span class="fu">unique</span>(idw_jan2019<span class="sc">$</span>lon); nlon <span class="ot">&lt;-</span> <span class="fu">length</span>(lon)</span>
+<span id="cb50-47"><a href=""></a>lat <span class="ot">&lt;-</span> <span class="fu">unique</span>(idw_jan2019<span class="sc">$</span>lat); nlat <span class="ot">&lt;-</span> <span class="fu">length</span>(lat)</span>
+<span id="cb50-48"><a href=""></a>idw_mat_jan2019 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(idw_jan2019<span class="sc">$</span>var1.pred, <span class="at">nrow =</span> nlat, <span class="at">ncol =</span> nlon)</span>
+<span id="cb50-49"><a href=""></a>idw_mat_jan2022 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(idw_jan2022<span class="sc">$</span>var1.pred, <span class="at">nrow =</span> nlat, <span class="at">ncol =</span> nlon)</span>
+<span id="cb50-50"><a href=""></a></span>
+<span id="cb50-51"><a href=""></a><span class="co"># Convert to raster</span></span>
+<span id="cb50-52"><a href=""></a>idw_raster_jan2019 <span class="ot">&lt;-</span> <span class="fu">raster</span>(idw_mat_jan2019, <span class="at">xmn =</span> <span class="fu">min</span>(lon), <span class="at">xmx =</span> <span class="fu">max</span>(lon), </span>
+<span id="cb50-53"><a href=""></a>                             <span class="at">ymn =</span> <span class="fu">min</span>(lat), <span class="at">ymx =</span> <span class="fu">max</span>(lat))</span>
+<span id="cb50-54"><a href=""></a>idw_raster_jan2022 <span class="ot">&lt;-</span> <span class="fu">raster</span>(idw_mat_jan2022, <span class="at">xmn =</span> <span class="fu">min</span>(lon), <span class="at">xmx =</span> <span class="fu">max</span>(lon), </span>
+<span id="cb50-55"><a href=""></a>                             <span class="at">ymn =</span> <span class="fu">min</span>(lat), <span class="at">ymx =</span> <span class="fu">max</span>(lat))</span>
+<span id="cb50-56"><a href=""></a></span>
+<span id="cb50-57"><a href=""></a><span class="co"># Mask the raster with the boundary of Pulau Jawa</span></span>
+<span id="cb50-58"><a href=""></a>p_jawa <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">"data/jawa.geojson"</span>)</span>
+<span id="cb50-59"><a href=""></a>stck <span class="ot">&lt;-</span> <span class="fu">stack</span>(idw_raster_jan2019, idw_raster_jan2022)</span>
+<span id="cb50-60"><a href=""></a>stck <span class="ot">&lt;-</span> <span class="fu">mask</span>(stck, p_jawa)</span>
+<span id="cb50-61"><a href=""></a><span class="fu">names</span>(stck) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"IDW Jan_2019"</span>, <span class="st">"IDW Jan_2022"</span>)</span>
+<span id="cb50-62"><a href=""></a></span>
+<span id="cb50-63"><a href=""></a><span class="co"># Plot the result</span></span>
+<span id="cb50-64"><a href=""></a>idw_plt <span class="ot">&lt;-</span> <span class="fu">tm_shape</span>(stck) <span class="sc">+</span> </span>
+<span id="cb50-65"><a href=""></a>  <span class="fu">tm_raster</span>(<span class="at">style =</span> <span class="st">'cont'</span>) <span class="sc">+</span> </span>
+<span id="cb50-66"><a href=""></a>  <span class="fu">tm_shape</span>(p_jawa) <span class="sc">+</span> </span>
+<span id="cb50-67"><a href=""></a>  <span class="fu">tm_borders</span>() <span class="sc">+</span></span>
+<span id="cb50-68"><a href=""></a>  <span class="fu">tm_facets</span>(<span class="at">nrow =</span> <span class="dv">2</span>)</span>
+<span id="cb50-69"><a href=""></a>idw_plt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><img data-src="images/idw_R.png" style="width:70.0%"></p>
+</div>
+<div id="tabset-15-2">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb51-1"><a href=""></a><span class="im">import</span> geopandas <span class="im">as</span> gpd</span>
+<span id="cb51-2"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb51-3"><a href=""></a><span class="im">import</span> xarray <span class="im">as</span> xr</span>
+<span id="cb51-4"><a href=""></a><span class="im">import</span> rioxarray <span class="im">as</span> rxr</span>
+<span id="cb51-5"><a href=""></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb51-6"><a href=""></a><span class="im">import</span> cartopy.crs <span class="im">as</span> ccrs</span>
+<span id="cb51-7"><a href=""></a><span class="im">from</span> matplotlib.colors <span class="im">import</span> LinearSegmentedColormap</span>
+<span id="cb51-8"><a href=""></a></span>
+<span id="cb51-9"><a href=""></a><span class="co"># Filter for January 2019 and 2022</span></span>
+<span id="cb51-10"><a href=""></a>dats_monthly_jan <span class="op">=</span> dats_monthly[(dats_monthly[<span class="st">'Bulan'</span>].dt.month <span class="op">==</span> <span class="dv">1</span>) <span class="op">&amp;</span> (dats_monthly[<span class="st">'Bulan'</span>].dt.year.isin([<span class="dv">2019</span>, <span class="dv">2022</span>]))]</span>
+<span id="cb51-11"><a href=""></a>dats_monthly_jan_2019 <span class="op">=</span> dats_monthly_jan[dats_monthly_jan[<span class="st">'Bulan'</span>].dt.year <span class="op">==</span> <span class="dv">2019</span>]</span>
+<span id="cb51-12"><a href=""></a>dats_monthly_jan_2022 <span class="op">=</span> dats_monthly_jan[dats_monthly_jan[<span class="st">'Bulan'</span>].dt.year <span class="op">==</span> <span class="dv">2022</span>]</span>
+<span id="cb51-13"><a href=""></a></span>
+<span id="cb51-14"><a href=""></a><span class="co"># Define grid space</span></span>
+<span id="cb51-15"><a href=""></a>grid_space <span class="op">=</span> <span class="fl">0.05</span></span>
+<span id="cb51-16"><a href=""></a></span>
+<span id="cb51-17"><a href=""></a><span class="co"># Define grid_lon and grid_lat based on the min and max of lon and lat</span></span>
+<span id="cb51-18"><a href=""></a>grid_lon <span class="op">=</span> np.arange(dats_monthly_jan[<span class="st">'lon'</span>].<span class="bu">min</span>(), dats_monthly_jan[<span class="st">'lon'</span>].<span class="bu">max</span>(), grid_space)</span>
+<span id="cb51-19"><a href=""></a>grid_lat <span class="op">=</span> np.arange(dats_monthly_jan[<span class="st">'lat'</span>].<span class="bu">min</span>(), dats_monthly_jan[<span class="st">'lat'</span>].<span class="bu">max</span>(), grid_space)</span>
+<span id="cb51-20"><a href=""></a></span>
+<span id="cb51-21"><a href=""></a><span class="co"># Combine grid_lon and grid_lat into a meshgrid</span></span>
+<span id="cb51-22"><a href=""></a>all_lats <span class="op">=</span> np.meshgrid(grid_lon, grid_lat)[<span class="dv">1</span>].ravel()</span>
+<span id="cb51-23"><a href=""></a>all_lons <span class="op">=</span> np.meshgrid(grid_lon, grid_lat)[<span class="dv">0</span>].ravel()</span>
+<span id="cb51-24"><a href=""></a></span>
+<span id="cb51-25"><a href=""></a><span class="co"># Make empty data frame and assign all_lats and all_lons to the data frame</span></span>
+<span id="cb51-26"><a href=""></a>itrp <span class="op">=</span> pd.DataFrame()</span>
+<span id="cb51-27"><a href=""></a>itrp[<span class="st">'lat'</span>] <span class="op">=</span> all_lats</span>
+<span id="cb51-28"><a href=""></a>itrp[<span class="st">'lon'</span>] <span class="op">=</span> all_lons</span>
+<span id="cb51-29"><a href=""></a></span>
+<span id="cb51-30"><a href=""></a><span class="co"># Do the IDW with sklearn.neighbors.KNeighborsRegressor</span></span>
+<span id="cb51-31"><a href=""></a><span class="im">from</span> sklearn.neighbors <span class="im">import</span> KNeighborsRegressor</span>
+<span id="cb51-32"><a href=""></a></span>
+<span id="cb51-33"><a href=""></a><span class="co"># Define the number of neighbors</span></span>
+<span id="cb51-34"><a href=""></a>n_neighbors <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb51-35"><a href=""></a></span>
+<span id="cb51-36"><a href=""></a><span class="co"># Define the power parameter</span></span>
+<span id="cb51-37"><a href=""></a>power <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb51-38"><a href=""></a></span>
+<span id="cb51-39"><a href=""></a><span class="co"># Define the KNeighborsRegressor</span></span>
+<span id="cb51-40"><a href=""></a>knn <span class="op">=</span> KNeighborsRegressor(n_neighbors<span class="op">=</span>n_neighbors, weights<span class="op">=</span><span class="st">'distance'</span>, p<span class="op">=</span>power)</span>
+<span id="cb51-41"><a href=""></a></span>
+<span id="cb51-42"><a href=""></a><span class="co"># Fit the KNeighborsRegressor</span></span>
+<span id="cb51-43"><a href=""></a>knn_model <span class="op">=</span> knn.fit(dats_monthly_jan_2019[[<span class="st">'lon'</span>, <span class="st">'lat'</span>]], dats_monthly_jan_2019[<span class="st">'RR'</span>])</span>
+<span id="cb51-44"><a href=""></a></span>
+<span id="cb51-45"><a href=""></a><span class="co"># Predict the value</span></span>
+<span id="cb51-46"><a href=""></a>itrp[<span class="st">'RR_2019'</span>] <span class="op">=</span> knn_model.predict(itrp[[<span class="st">'lon'</span>, <span class="st">'lat'</span>]])</span>
+<span id="cb51-47"><a href=""></a></span>
+<span id="cb51-48"><a href=""></a></span>
+<span id="cb51-49"><a href=""></a><span class="co"># Read the geojson file</span></span>
+<span id="cb51-50"><a href=""></a>p_jawa <span class="op">=</span> gpd.read_file(<span class="st">'data/jawa.geojson'</span>)</span>
+<span id="cb51-51"><a href=""></a></span>
+<span id="cb51-52"><a href=""></a><span class="co"># Convert predicted data frame into xarray</span></span>
+<span id="cb51-53"><a href=""></a>itrp_xr <span class="op">=</span> xr.DataArray(itrp[<span class="st">'RR_2019'</span>].values.reshape(<span class="bu">len</span>(grid_lat), <span class="bu">len</span>(grid_lon)),</span>
+<span id="cb51-54"><a href=""></a>                          coords<span class="op">=</span>{<span class="st">'lat'</span>: grid_lat, <span class="st">'lon'</span>: grid_lon},</span>
+<span id="cb51-55"><a href=""></a>                          dims<span class="op">=</span>[<span class="st">'lat'</span>, <span class="st">'lon'</span>])</span>
+<span id="cb51-56"><a href=""></a>itrp_xr <span class="op">=</span> itrp_xr.rio.write_crs(<span class="st">"EPSG:4326"</span>)</span>
+<span id="cb51-57"><a href=""></a>itrp_xr <span class="op">=</span> itrp_xr.rio.set_spatial_dims(<span class="st">"lon"</span>, <span class="st">"lat"</span>, inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb51-58"><a href=""></a></span>
+<span id="cb51-59"><a href=""></a><span class="co"># Masking the data with the polygon of Pulau Jawa</span></span>
+<span id="cb51-60"><a href=""></a>itrp_xr_clipped <span class="op">=</span> itrp_xr.rio.clip(p_jawa.geometry, drop<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb51-61"><a href=""></a></span>
+<span id="cb51-62"><a href=""></a><span class="co"># Plot with matplotlib and cartopy</span></span>
+<span id="cb51-63"><a href=""></a><span class="co"># Color map customization: red, orange, yellow, green, blue</span></span>
+<span id="cb51-64"><a href=""></a>colors <span class="op">=</span> [<span class="st">'#FF0000'</span>, <span class="st">'#FFA500'</span>, <span class="st">'#FFFF00'</span>, <span class="st">'#00FF00'</span>, <span class="st">'#0000FF'</span>]</span>
+<span id="cb51-65"><a href=""></a>cmap <span class="op">=</span> LinearSegmentedColormap.from_list(<span class="st">'mycmap'</span>, colors)</span>
+<span id="cb51-66"><a href=""></a></span>
+<span id="cb51-67"><a href=""></a><span class="co"># Create a figure and axis</span></span>
+<span id="cb51-68"><a href=""></a>fig, ax <span class="op">=</span> plt.subplots(subplot_kw<span class="op">=</span>{<span class="st">'projection'</span>: ccrs.PlateCarree()}, figsize<span class="op">=</span>(<span class="dv">9</span>, <span class="dv">4</span>))</span>
+<span id="cb51-69"><a href=""></a>ax.set_extent([<span class="dv">106</span>, <span class="dv">114</span>, <span class="op">-</span><span class="dv">8</span>, <span class="op">-</span><span class="dv">6</span>], crs<span class="op">=</span>ccrs.PlateCarree())</span>
+<span id="cb51-70"><a href=""></a></span>
+<span id="cb51-71"><a href=""></a><span class="co"># Plot the data</span></span>
+<span id="cb51-72"><a href=""></a>cs <span class="op">=</span> ax.contourf(grid_lon, grid_lat, itrp_xr_clipped.values.reshape(<span class="bu">len</span>(grid_lat), <span class="bu">len</span>(grid_lon)),</span>
+<span id="cb51-73"><a href=""></a>                 levels<span class="op">=</span><span class="bu">range</span>(<span class="dv">0</span>, <span class="dv">700</span>, <span class="dv">25</span>), transform<span class="op">=</span>ccrs.PlateCarree(), cmap<span class="op">=</span>cmap)</span>
+<span id="cb51-74"><a href=""></a>fig.colorbar(cs, ax<span class="op">=</span>ax, shrink<span class="op">=</span><span class="fl">0.6</span>, label<span class="op">=</span><span class="st">'Rainfall (mm)'</span>)</span>
+<span id="cb51-75"><a href=""></a></span>
+<span id="cb51-76"><a href=""></a><span class="co"># Add gridlines just for left and bottom side</span></span>
+<span id="cb51-77"><a href=""></a>ax.set_xticks(np.arange(<span class="dv">106</span>, <span class="dv">114</span>, <span class="dv">1</span>), crs<span class="op">=</span>ccrs.PlateCarree())</span>
+<span id="cb51-78"><a href=""></a>ax.set_xticklabels([<span class="ss">f"</span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">°E"</span> <span class="cf">for</span> i <span class="kw">in</span> np.arange(<span class="dv">106</span>, <span class="dv">114</span>, <span class="dv">1</span>)])</span>
+<span id="cb51-79"><a href=""></a>ax.set_yticks(np.arange(<span class="op">-</span><span class="dv">8</span>, <span class="op">-</span><span class="dv">5</span>, <span class="dv">1</span>), crs<span class="op">=</span>ccrs.PlateCarree())</span>
+<span id="cb51-80"><a href=""></a>ax.set_yticklabels([<span class="ss">f"</span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">°S"</span> <span class="cf">for</span> i <span class="kw">in</span> np.arange(<span class="dv">8</span>, <span class="dv">5</span>, <span class="op">-</span><span class="dv">1</span>)])</span>
+<span id="cb51-81"><a href=""></a></span>
+<span id="cb51-82"><a href=""></a>ax.set_xlabel(<span class="st">'Longitude'</span>)</span>
+<span id="cb51-83"><a href=""></a>ax.set_ylabel(<span class="st">'Latitude'</span>)</span>
+<span id="cb51-84"><a href=""></a></span>
+<span id="cb51-85"><a href=""></a>ax.add_geometries(p_jawa.geometry, crs<span class="op">=</span>ccrs.PlateCarree(), facecolor<span class="op">=</span><span class="st">'none'</span>, edgecolor<span class="op">=</span><span class="st">'black'</span>)</span>
+<span id="cb51-86"><a href=""></a>ax.title.set_text(<span class="st">'Rainfall IDW January 2019'</span>)</span>
+<span id="cb51-87"><a href=""></a>plt.savefig(<span class="st">'idw_py.png'</span>, dpi<span class="op">=</span><span class="dv">300</span>, bbox_inches<span class="op">=</span><span class="st">'tight'</span>)</span>
+<span id="cb51-88"><a href=""></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><img data-src="images/idw_py.png" style="width:60.0%"></p>
+</div>
+</div>
+</div>
+</section>
+<section id="visualisasi-data-iklim-1" class="slide level2">
+<h2>Visualisasi Data Iklim (1)</h2>
+<div class="panel-tabset">
+<ul id="tabset-16" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-16-1">R</a></li><li><a href="#tabset-16-2">Python</a></li></ul>
+<div class="tab-content">
+<div id="tabset-16-1">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href=""></a><span class="co"># library(ggplot2)</span></span>
+<span id="cb52-2"><a href=""></a><span class="co"># ggplot(dats) + </span></span>
+<span id="cb52-3"><a href=""></a><span class="co">#   geom_bar(aes(x = Bulan, y = RR, fill = Lokasi), stat = "identity", position = "jitter")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<div id="tabset-16-2">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb53-1"><a href=""></a><span class="co"># import matplotlib.pyplot as plt</span></span>
+<span id="cb53-2"><a href=""></a></span>
+<span id="cb53-3"><a href=""></a><span class="co"># plt.figure(figsize=(10, 5))</span></span>
+<span id="cb53-4"><a href=""></a><span class="co"># for lokasi in dats['Lokasi'].unique():</span></span>
+<span id="cb53-5"><a href=""></a><span class="co">#     plt.plot(dats[dats['Lokasi'] == lokasi]['Bulan'], dats[dats['Lokasi'] == lokasi]['RR'], label=lokasi)</span></span>
+<span id="cb53-6"><a href=""></a><span class="co"># plt.legend()</span></span>
+<span id="cb53-7"><a href=""></a><span class="co"># plt.show()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
 </div>
 <div class="quarto-auto-generated-content">
+<p><img src="images/logo.png" class="slide-logo"></p>
 <div class="footer footer-default">
-
+<p>Analisis dan Visualisasi Data Iklim dengan R &amp; Python</p>
 </div>
 </div>
-</section>
+</section></section>
     </div>
   </div>
 
@@ -697,14 +1756,14 @@ Tutor: Agung Baruna Setiawan Noor, S.Si., M.Si.
         previewLinks: false,
 
         // Transition style (none/fade/slide/convex/concave/zoom)
-        transition: 'none',
+        transition: 'slide',
 
         // Transition speed (default/fast/slow)
         transitionSpeed: 'default',
 
         // Transition style for full page slide backgrounds
         // (none/fade/slide/convex/concave/zoom)
-        backgroundTransition: 'none',
+        backgroundTransition: 'fade',
 
         // Number of slides away from the current that are visible
         viewDistance: 3,
@@ -719,7 +1778,7 @@ Tutor: Agung Baruna Setiawan Noor, S.Si., M.Si.
         // specified using percentage units.
         width: 2000,
 
-        height: 900,
+        height: 1400,
 
         // Factor of the display size that should remain empty around the content
         margin: 0.1,

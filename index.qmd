@@ -7,30 +7,54 @@
 
 ## R
 
-```{r hello-r, eval=TRUE, echo=TRUE}
+```{r hello-r, eval=TRUE}
 print("Hello, R!")
 ```
 
 ## Python
 
-```{python hello-python, eval=TRUE, echo=TRUE}
+```{python hello-python, eval=TRUE}
 print("Hello, Python!")
 ```
 
 :::
 
-## Outline
 
-### Hari ke-1: 22 Maret 2024
+# 🤝 Mungkin Sudah Kenal
 
-1.  Pendahuluan Analisis Data Iklim
-2.  Pengambilan Data Iklim dan Pra-Pross Pengolahan Data Iklim
-3.  Explorative Data Analysis (EDA) Iklim
+- Agung Baruna Setiawan Noor, panggil saja Agung
+- S1: Meteorologi Terapan, GFM, IPB (2015-2019)
+- S2: Klimatologi Terapan, Sekolah Pascasarjana, IPB (2020-2021)
+- Rumahnya di sini 👇
 
-### Hari ke-2: 23 Maret 2024
+::: {.panel-tabset}
 
-1.  Visualisai Data Iklim
-2.  Visualisasi Interaktif
+## R
+
+```{r my-home, eval=TRUE, echo=TRUE, out.height=400, out.width="100%"}
+library(leaflet)
+leaflet() %>% addTiles() %>% 
+    setView(lng = 106.685, lat = -6.575, zoom = 12) %>%
+    addMarkers(lng = 106.685, lat = -6.575)
+```
+
+## Python
+
+```{python my-home3, eval=FALSE, echo=TRUE}
+import folium
+m = folium.Map(location=[-6.575, 106.685], zoom_start=12)
+folium.Marker([-6.575, 106.685]).add_to(m)
+m
+```
+
+```{r my-home2, eval=TRUE, echo=FALSE, out.height=400, out.width="100%"}
+library(leaflet)
+leaflet() %>% addTiles() %>% 
+    setView(lng = 106.685, lat = -6.575, zoom = 12) %>%
+    addMarkers(lng = 106.685, lat = -6.575)
+```
+
+:::
 
 
 # Sebelum Mulai
@@ -53,44 +77,689 @@ Pastikan Anda telah memasang bahasa pemrograman R dan/atau Python sesuai dengan 
 +----------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
 +----------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
-## Python
+## 🐍 Python
 
-- Rekomenasi IDE: [Jupyter Notebook](https://jupyter.org)
+- Rekomendasi IDE: [Jupyter Notebook](https://jupyter.org)
 - Pemasangan Python disarankan menggunakan [Anaconda/Miniconda](https://www.anaconda.com/products/distribution)
 - Anda juga dapat memanfaatkan Google Colaboratory jika tidak ingin memasang Python di komputer/laptop lokal
 
+::: {.callout-note}
+Pemasangan package di dalam Google Colaboratory dapat dilakukan dengan perintah `!conda install -c conda-forge nama-package` 
+:::
 
 ## Langkah Pemasangan Jupyter Notebook
 
 - Jika Anda telah memasang Anaconda, Jupyter Notebook sudah terpasang secara otomatis, *kecuali* Miniconda. 
-- Untuk pengguna Miniconda, Anda perlu memasang Jupyter Notebook secara manual dengan perintah berikut di terminal Anaconda Prompt
-```{bash jupyter-install}
-conda install -c conda-forge jupyterlab
-```
 - Untuk membuka Jupyter Notebook, buka Anaconda Navigator dan klik Jupyter Notebook
 - Atau, bisa menggunakan perintah berikut di terminal Anaconda Prompt. Secara otomatis, Jupyter Notebook akan terbuka di browser.
 ```{bash jupyter-start}
 jupyter notebook
 ```
 - Untuk MacOS dan Linux, jupyter notebook juga telah terpasang otomatis saat memasang Anaconda. Perintah di atas juga berlaku di MacOS dan Linux
+- Untuk pengguna Miniconda, Anda perlu memasang Jupyter Notebook secara manual dengan perintah berikut di terminal Anaconda Prompt
 
+# 📊 Data
 
-# Package
+Data-data di bawah ini dapat diunduh pada halaman [https://s.id/cdav-data](https://s.id/cdav-data)
 
-Anda perlu memasang beberapa package di bawah ini sesuai dengan bahasa pemrograman yang dipilih. Jika Anda menggunakan Python di RStudio, pemasangan package Python menggunakan perintah R (lihat bagian `Python (r-reticulate)`)
+- Data iklim Observasi harian di Pulau Jawa oleh [BMKG](https://dataonline.bmkg.go.id)
+- Data curah hujan reanalisis bulanan [Climate Hazards Group InfraRed Precipitation with Station (CHIRPS)](https://data.chc.ucsb.edu)
+- Data suhu udara dan curah hujan reanalisis [Climate Research Unit (CRU)](https://crudata.uea.ac.uk) bulanan
+
+# 📦 Package
+
+Anda perlu memasang beberapa package di bawah ini sesuai dengan bahasa pemrograman yang akan digunakan.
 
 ::: {.panel-tabset}
 
 ### R
 
 ```{r install-r-packages}
-install.packages(c("tidyverse", "metR", "ncdf4", "plotly", "leaflet", "raster", "sf", "gstat")
+install.packages(c("tidyverse", "metR", "readxl", "ncdf4", 
+                   "plotly", "leaflet", "tmap", "leaflet.extras", 
+                   "raster", "sf", "gstat", "PCICt"))
 ```
 
 ### Python
 
 ```{bash install-python-packages}
-conda install -c conda-forge plotly geopandas rioxarray
+conda create -n cdav-pyR -c conda-forge ipykernel jupyter plotly geopandas rioxarray leafmap openpyxl cartopy iris
+conda activate cdav-pyR
 ```
 
 :::
+
+## Apa yang akan dipelajari?
+
+### Hari ke-1: 22 Maret 2024
+
+1.  R & Python untuk Analisis Data Iklim
+2.  Jenis Data Iklim
+3.  Pra-Proses Pengolahan Data Iklim
+4.  Explorative Data Analysis (EDA) Iklim
+5.  Interpolasi Spasial Data Iklim
+
+### Hari ke-2: 23 Maret 2024
+
+1.  Dasar Visualisai Data Iklim
+2.  Visualisasi Interaktif Data Iklim
+
+::: {.callout-important title="Learning by Case Study"}
+Di dalam tutorial ini, data-data di atas yang telah Anda unduh akan digunakan langsung sebagai bahan praktik sehingga beberapa teori dasar tentang R & Python akan dijelaskan hanya secara singkat
+:::
+
+
+
+# Hari ke-1: 22 Maret 2024 
+
+1.  R & Python untuk Analisis Data Iklim
+2.  Jenis Data Iklim 
+3.  Pra-Proses Pengolahan Data Iklim
+4.  Explorative Data Analysis (EDA) Iklim 
+5.  Interpolasi Spasial Data Iklim
+
+::: {.callout-tip title="Useful References"}
+
+[https://projectpythia.org](https://projectpythia.org) -- [https://r4ds.had.co.nz](https://r4ds.had.co.nz) -- [https://leafmap.org](https://leafmap.org) -- [https://github.com/sacridini/Awesome-Geospatial](https://github.com/sacridini/Awesome-Geospatial) -- [https://github.com/pangeo-data/awesome-open-climate-science](https://github.com/pangeo-data/awesome-open-climate-science) -- [https://github.com/meteostat/meteostat-python](https://github.com/meteostat/meteostat-python) -- [https://github.com/pangeo-data/WeatherBench](https://github.com/pangeo-data/WeatherBench)
+
+:::
+
+
+## R & Python untuk Analisis Data Iklim (1)
+
+- R dan Python merupakan bahasa pemrograman interpreter. Pada awalnya, bahasa tersebut memiliki kegunaan yang berbeda.
+- R umum digunakan untuk analisis dan visualisasi data statistik, sedangkan python adalah bahasa pemrograman umum, yaitu tidak dibatasi pada satu bidang khusus
+- Seiring berkembangnya kedua bahasa pemrograman ini, keduanya dapat menjadi pilihan yang baik untuk analisis data iklim.
+- Data iklim saat ini tersedia dengan berbagai format data, serta ukuran file nya yang semakin besar. Jadi, kedua bahasa pemrograman ini sebagai pengolah data dapat dimanfaatkan.
+- Beberapa package R dan Python yang memiliki kemiripan fungsi:
+
+| R                        | Python                         |
+| ------------------------ | ------------------------------ |
+| `dplyr`/`data.table`     | `pandas`/`polars`              |
+| `ggplot2`                | `matplotlib`/`seaborn`/`bokeh` |
+| `rasterVis`              | `iris`                         |
+| `leaflet`                | `leafmap`                      |
+| `ncdf4`/`metR`           | `xarray`/`netcdf4`             |
+| `raster`/`stars`/`terra` | `rasterio`/`rioxarray`         |
+| `sf`/`sp`                | `geopandas`/`shapely`          |
+
+
+## R & Python untuk Analisis Data Iklim (2)
+
+::: {.incremental}
+
+- Mengapa saya memilih R?
+  + Indeks mulai dari 1 🗿
+  +  *Package* statistik dan visualisasi lebih banyak, seperti `dplyr`, `datatable`, `ggplot2`, ..., bahkan spasial, seperti `raster`, `stars`, `sf`, `tmap`, `leaflet`, ...
+  +  Lebih mudah sintaksnya
+- Mengapa saya memilih Python?
+  + Walaupun R & Python sama-sama bahasa pemrograman interpreter di mana kecepatan eksekusi selalu lebih lambat dibandingkan dengan C atau Fortran, Python lebih cepat daripada R (untuk kasus tertentu)
+  + Manajemen memory lebih baik
+  + Lebih mudah melakukan komputasi paralel dengan `dask` sehingga cocok untuk data besar
+  + Walaupun saat ini package machine learning dan deep learning sudah ada di R, Python lebih unggul dalam hal ini.
+  + Oleh karena Python adalah bahasa general, saya bisa mendalami bidang lain selain statistik dan visualisasi, seperti web development atau data engineer
+- Mengapa saya tidak memilih R?
+  + Manajemen memori kurang baik sehingga membutuhkan RAM yang lebih besar (untuk kasus data besar)
+  + Sangat *tricky* untuk menjalankan komputasi paralel
+- Mengapa saya tidak memilih Python?
+  + Indeks mulai dari 0 🗿
+  + Sintaks relatif sulit daripada R jika yang pertama kali dipelajari adalah R
+  + Package statistik dan visualisasi tidak sebanyak R
+  + Sintaks untuk melakukan visualisasi relatif sulit, apalagi jika membuat grafik panel karena membutuhkan perulangan (kasus di `matplotlib`)
+
+:::
+
+## Jenis Data Iklim
+
+- Data iklim memiliki berbagai bentuk, mulai dari data observasi, hasil model (biasanya berbentuk grid), serta data citra satelit
+- Format tipe data iklim: spreadsheet/database (seperti Excel, CSV, TSV, SQLite, ...), [netCDF](https://www.unidata.ucar.edu/software/netcdf), [HDF](https://hdfgroup.org), [GRIB](https://climatedataguide.ucar.edu/climate-tools/GRIB), dan [Zarr](https://zarr.dev).
+- Dimensi data iklim: waktu (t), lokasi (x, y, z), dan variabel (pr, t2m, u10, v10, ...)
+- Semakin berkembangnya teknologi komputasi, data iklim saat ini semakin banyak sehingga ukuran file datanya juga semakin besar. 
+  Contoh data iklim tersedia gratis: [Global Forecast System (GFS)](https://registry.opendata.aws/noaa-gfs-bdp-pds/), [ECMWF IFS](https://data.ecmwf.int/), dan [ERA5](https://cds.climate.copernicus.eu/cdsapp#!/dataset/reanalysis-era5-single-levels?tab=overview)
+
+![](images/climatedata3d.png){width="30%"}
+
+::: {.callout-tip}
+Untuk mengubah format data iklim GRIB menjadi netCDF, Anda dapat menggunakan software Climate Data Operator (CDO) dan perintahnya adalah `cdo -f nc copy nama-file.grib nama-file.nc`
+:::
+
+
+## Pra-Proses Pengolahan Data Iklim (1)
+
+- Sebelum mengolah, pastikan Anda punya datanya dulu 🗿
+- Data iklim biasanya berupa data mentah (tulisan tangan). Tapi untuk saat ini, khususnya data observasi, data mentah ini sudah tersedia dalam format digital. Hanya saja, ketersediaan data untuk setiap lokasi pengamatan terkadang terdapat data yang hilang (missing value) sehingga data ini perlu diisi dengan beberapa metode tertentu.
+- Untuk mengimpor file tersebut ke dalam R/Python, Anda dapat menggunakan package `readxl` (R) atau `pandas` (Python)
+
+::: {.panel-tabset}
+
+## R
+
+```{r import-data-r, eval=TRUE}
+library(readxl)
+library(tidyverse)
+library(lubridate)
+dats <- read_excel("data/BMKG-Jawa.xlsx", sheet = 2)
+head(dats)
+```
+
+## Python
+```{python import-data-py, eval=TRUE}
+import pandas as pd
+dats = pd.read_excel("data/BMKG-Jawa.xlsx", sheet_name = 1)
+dats.head()
+```
+
+:::
+
+- Jika Anda lihat pada bagian kolom `Tanggal`, tipenya masih berupa karakter (`chr` di R atau `object` di Python). Format tanggalnya adalah `dd-mm-yyyy`.
+
+::: {.panel-tabset}
+
+## Python
+
+```{python dtypes-py, eval=TRUE}
+dats.dtypes
+```
+:::
+
+## Pra-Proses Pengolahan Data Iklim (2)
+
+- Untuk mengubah tipe data pada kolom `Tanggal` menjadi tipe *date*, Anda dapat menggunakan perintah ini
+
+::: {.panel-tabset}
+
+## R
+
+```{r column-date-r, eval=TRUE}
+dats <- dats %>%
+  mutate(Tanggal = as.Date(Tanggal, format = '%d-%m-%Y'))
+head(dats)
+```
+
+## Python
+
+```{python column-date-py, eval=TRUE}
+dats['Tanggal'] = pd.to_datetime(dats['Tanggal'], format="%d-%m-%Y")
+dats.dtypes
+```
+
+:::
+
+- Oleh karena data observasi BMKG memiliki kode 8888 dan 9999, nilai tersebut diubah menjadi `NA`
+
+::: {.panel-tabset}
+
+## R
+
+```{r change-vals-r, eval=TRUE}
+dats <- dats %>% 
+  mutate(across(1:ncol(dats), function(x) if_else(x == 8888 | x == 9999, NA, x)))
+```
+
+## Python
+
+```{python change-vals-py, eval=TRUE}
+from numpy import nan
+dats.replace([8888.0, 9999.0], nan, inplace=True)
+```
+
+:::
+
+- Kemudian, data observasi harian diubah menjadi data bulanan dengan kolom yang dipilih misalkan `Tanggal`, `Lokasi`, `Tavg`, dan `RR`
+
+::: {.panel-tabset}
+
+## R
+
+```{r summarise-r, eval=TRUE}
+dats <- dats %>%
+  group_by(Tahun = year(Tanggal), Bulan = month(Tanggal)) %>%
+  summarise(Tavg = mean(Tavg, na.rm = TRUE), RR = sum(RR, na.rm = TRUE)) %>%
+  mutate(Bulan = make_date(Tahun, Bulan))
+head(dats)
+```
+
+## Python
+
+```{python summarise-py, eval=TRUE}
+dats = dats.groupby([
+    dats['Tanggal'].dt.year.rename('Year'), 
+    dats['Tanggal'].dt.month.rename('Month')
+]).agg({'Tavg': 'mean', 'RR': 'sum'})
+dats = dats.reset_index()
+dats['Bulan'] = pd.to_datetime(dats[['Year', 'Month']].assign(Day=1))
+dats.drop(columns=['Year', 'Month'], inplace=True)
+dats.head()
+```
+
+:::
+
+## Pra-Proses Pengolahan Data Iklim (3)
+
+- Oleh karena terdapat banyak sheet pada file Excel, maka perlu dilakukan iterasi/perulangan untuk menggabungkan semuanya menjadi satu dataframe. 
+- Untuk R, fungsi `map_dfr()` dari package `purrr` dapat digunakan.
+- Untuk python, Anda dapat menggunakan perulangan `for` untuk menyatukan semua sheet dalam 1 `list`, kemudian `concat` dari package `pandas` untuk menggabungkan semua sheet tersebut ke dalam 1 dataframe sehingga tipe datanya menjadi `Dataframe`.
+
+::: {.panel-tabset}
+
+## R
+
+```{r import-all-sheets-r, eval=TRUE}
+library(readxl)
+library(dplyr)
+
+sheets <- excel_sheets("data/BMKG-Jawa.xlsx")
+sheets <- sheets[2:length(sheets)] # sheet 1 is metadata
+dats <- map_dfr(sheets, ~{
+  sheet_name <- .x
+  sheet_data <- read_excel("data/BMKG-Jawa.xlsx", sheet = .x) %>%
+    # Pilih hanya kolom Tanggal, Tavg, dan RR
+    select(Tanggal, lon, lat, Tavg, RR) %>%
+    # Menambahkan nama stasiun
+    mutate(Lokasi = sheet_name) %>%
+    # Mengubah kolom Tanggal dari tipe chr menjadi date
+    mutate(Tanggal = as.Date(Tanggal, format = '%d-%m-%Y')) %>%
+    # Mengubah nilai 8888 dan 9999 menjadi NA
+    mutate(across(1:ncol(.), function(x) if_else(x == 8888 | x == 9999, NA, x)))
+  
+  return(sheet_data)
+})
+
+dats
+```
+
+## Python
+
+```{python import-all-sheets-py, eval=TRUE}
+# Initialize an empty dataframe
+dats = []
+
+# Read each sheet in the file
+sheets = pd.read_excel("data/BMKG-Jawa.xlsx", sheet_name=None)
+
+# Iterate through each sheet
+for sheet_name, sheet_data in sheets.items():
+  # Skip the first sheet (metadata)
+  if sheet_name.lower() == 'metadata':
+    continue
+  
+  # Add the sheet name as a column
+  sheet_data['Lokasi'] = sheet_name
+  
+  # Select only the 'Tanggal', 'Tavg', and 'RR' columns
+  sheet_data = sheet_data[['Tanggal', 'Lokasi', 'lon', 'lat', 'Tavg', 'RR']]
+
+  # Convert the 'Tanggal' column to datetime
+  sheet_data['Tanggal'] = pd.to_datetime(sheet_data['Tanggal'], format='%d-%m-%Y')
+  
+  # Replace 8888 and 9999 with NaN
+  sheet_data.replace([8888, 9999], nan, inplace=True)
+
+  # Append the sheet data to the main dataframe
+  dats.append(sheet_data)
+
+# Concatenate all the dataframes in the list
+dats = pd.concat(dats)
+dats
+```
+
+:::
+
+
+## Pra-Proses Pengolahan Data Iklim (4)
+
+- Di tahapan ini, Anda dapat mencari jumlah data yang hilang untuk semua lokasi stasiun
+
+::: {.panel-tabset}
+
+## R
+
+```{r missing-data-r, eval=TRUE}
+dats_miss <- dats %>%
+  group_by(Lokasi, lon, lat) %>%
+  summarise(missing_Tavg = sum(is.na(Tavg)), missing_RR = sum(is.na(RR)))
+dats_miss
+```
+
+## Python
+
+```{python missing-data-py, eval=TRUE}
+dats_miss = dats.groupby(['Lokasi', 'lon', 'lat']).agg({
+    'Tavg': lambda x: x.isna().sum(),
+    'RR': lambda x: x.isna().sum()
+}).reset_index()
+dats_miss.columns = ['Lokasi', 'lon', 'lat', 'missing_Tavg', 'missing_RR']
+dats_miss
+```
+
+:::
+
+- Selanjutnya, Anda dapat menghitung rata-rata bulanan curah hujan dan suhu udara di setiap lokasi stasiun pengamatan
+
+::: {.panel-tabset}
+
+## R
+
+```{r mean-monthly-r, eval=TRUE}
+dats_monthly <- dats %>%
+  group_by(Tahun = year(Tanggal), Bulan = month(Tanggal), Lokasi, lon, lat) %>%
+  summarise(Tavg = mean(Tavg, na.rm = TRUE), RR = sum(RR, na.rm = TRUE)) %>%
+  mutate(Bulan = make_date(Tahun, Bulan)) %>%
+  select(Bulan, Lokasi, lon, lat, Tavg, RR)
+dats_monthly
+```
+
+## Python
+
+```{python mean-monthly-py, eval=TRUE}
+dats_monthly = dats.groupby([
+    dats['Tanggal'].dt.year.rename('Year'), 
+    dats['Tanggal'].dt.month.rename('Month'), 
+    'Lokasi', 'lon', 'lat'
+]).agg({'Tavg': 'mean', 'RR': 'sum'}).reset_index()
+dats_monthly['Bulan'] = pd.to_datetime(dats_monthly[['Year', 'Month']].assign(Day=1))
+dats_monthly.drop(columns=['Year', 'Month'], inplace=True)
+dats_monthly
+```
+
+:::
+
+
+
+## Explorative Data Analysis (EDA) Iklim (1)
+
+- EDA adalah tahap analisis data yang bertujuan menemukan pola-pola menarik di dalam data, seperti sebaran, tren, atau anomali
+- Ukuran pemusatan data (mean, median, ...), ukuran penyebaran data (jarak, standar deviasi, varian, kuantil, ...), serta visualisasi data (histogram, boxplot, scatter plot) adalah beberapa metode yang digunakan di dalam EDA
+- Pada contoh data iklim Pulau Jawa, misalkan mencari rata-rata curah hujan dan suhu udara bulanan klimatologi (1975 - 2022), serta standar deviasinya di setiap lokasi stasiun pengamatan
+
+::: {.panel-tabset}
+
+## R
+
+```{r mean-r, eval=TRUE}
+dats_mean <- dats %>%
+  group_by(Lokasi, lon, lat, Bulan = month(Tanggal), Tahun = year(Tanggal)) %>%
+  summarise(Tavg_av = mean(Tavg, na.rm = TRUE), RR_av = sum(RR, na.rm = TRUE), 
+            Tavg_sd = sd(Tavg, na.rm = TRUE)  , RR_sd = sd(RR, na.rm = TRUE))
+dats_mean
+```
+
+## Python
+
+```{python mean-py, eval=TRUE}
+dats_mean = dats.groupby(['Lokasi', 'lon', 'lat', 
+                          dats['Tanggal'].dt.month.rename('Year'), 
+                          dats['Tanggal'].dt.year.rename('Month')]).agg({
+    'Tavg': ['mean', 'std'],
+    'RR': ['sum', 'std']
+}).reset_index()
+dats_mean.columns = ['Lokasi', 'lon', 'lat', 'Bulan', 'Tahun', 'Tavg_av', 'Tavg_sd', 'RR_av', 'RR_sd']
+dats_mean
+```
+
+:::
+
+- Anda juga dapat melihat rangkuman dari data iklim dari seluruh lokasi stasiun pengamatan. Setiap fungsi dari python dan R memiliki luaran yang berbeda.
+
+::: {.panel-tabset}
+
+## R
+
+```{r summary-dats-r, eval=TRUE}
+summary(dats)
+```
+
+## Python
+
+```{python summary-dats-py, eval=TRUE}
+dats.describe()
+```
+
+:::
+
+## Explorative Data Analysis (EDA) Iklim (2)
+
+- Anda juga dapat menerapkan fungsi lain, seperti `quantile` (kuartil, persentil, desil, ...)
+- Pada contoh data iklim Pulau Jawa, misalkan mencari persentil ke-25 dan ke-95 dari curah hujan dan suhu udara bulanan klimatologi (1975 - 2022). Tahapan ini mungkin dapat berguna ketika mencari indeks iklim ekstrem. 
+
+::: {.panel-tabset}
+
+## R
+
+```{r quantile-r, eval=TRUE}
+dats_quantile <- dats %>%
+  group_by(Lokasi, lon, lat, Bulan = month(Tanggal)) %>%
+  summarise(Tavg_q25 = quantile(Tavg, 0.25, na.rm = TRUE), RR_q25 = quantile(RR, 0.25, na.rm = TRUE), 
+            Tavg_q95 = quantile(Tavg, 0.95, na.rm = TRUE), RR_q95 = quantile(RR, 0.95, na.rm = TRUE))
+dats_quantile
+```
+
+## Python
+
+```{python quantile-py, eval=TRUE}
+dats_quantile = dats.groupby([
+  'Lokasi', 'lon', 'lat', dats['Tanggal'].dt.month]).agg({
+    'Tavg': [lambda x: x.quantile(0.25), lambda x: x.quantile(0.95)],
+    'RR'  : [lambda x: x.quantile(0.25), lambda x: x.quantile(0.95)]
+  }).reset_index()
+dats_quantile.columns = ['Lokasi', 'lon', 'lat', 'Bulan', 'Tavg_q25', 'Tavg_q95', 'RR_q25', 'RR_q95']
+dats_quantile
+```
+
+:::
+
+
+## Spasialisasi Data Iklim (1)
+
+- Spasialisasi data iklim adalah proses mengubah data yang bersifat titik menjadi data yang bersifat grid dengan beberapa metode tertentu, contohnya polygon thiessen, inverse distance weighting, kriging, dan metode lainnya.
+- Tujuannya adalah untuk memperoleh data yang lebih representatif di suatu wilayah tertentu.
+- Hanya saja, metode ini memiliki kelemahan, yaitu membutuhkan data yang lengkap dan homogen di setiap lokasi pengamatan.
+- Selain itu, keterbatasan data observasi, seperti data kosong, juga dapat mempengaruhi hasil.
+- Data iklim Pulau Jawa yang telah kami sediakan memiliki data kosong di beberapa lokasi pengamatan.
+- Contoh dalam tutorial ini, metode IDW dan Ordinary Kriging akan digunakan untuk menginterpolasi data curah hujan bulanan di Pulau Jawa pada bulan Januari di tahun 2019 dan 2022 dengan menggunakan variabel `dats_monthly` yang telah dihitung sebelumnya. 
+- Package R: `gstat`, `sf` dan `raster` dan package Python: `geopandas` dan `rioxarray` akan digunakan untuk menginterpolasi data ini.
+
+## Spasialisasi Data Iklim (2)
+
+::: {.panel-tabset}
+
+## R
+
+```{r idw-r}
+library(gstat)
+library(raster)
+library(sf)
+library(tmap)
+
+tmap_options(check.and.fix = TRUE)
+
+# Filter Bulan: Januari 2019 & 2022
+dats_monthly_jan <- dats_monthly %>% filter(month(Bulan) == 1 & year(Bulan) %in% c(2019, 2022))
+dats_jan_2019 <- dats_monthly_jan %>% filter(Tahun == 2019)
+dats_jan_2022 <- dats_monthly_jan %>% filter(Tahun == 2022)
+
+# Convert dataframe to SpatialPointsDataFrames
+coordinates(dats_jan_2019) <- ~lon + lat
+coordinates(dats_jan_2022) <- ~lon + lat
+
+# Make an empty grid with the same extent as the data and resolution set to 0.05
+res <- 0.05
+empty_grd <- sf::st_make_grid(dats_jan_2019_sf, what = 'centers', cellsize = 0.05, crs = 4328)
+
+# Do the IDW calculation
+power <- 1
+idw_jan2019 <- idw(RR ~ 1, dats_jan_2019_sf, newdata = empty_grd, idp = power)
+idw_jan2022 <- idw(RR ~ 1, dats_jan_2022_sf, newdata = empty_grd, idp = power)
+
+# Assign coordinates to the IDW result
+idw_jan2019 <- idw_jan2019 %>%
+  mutate(lon = st_coordinates(idw_jan2019)[, 1], 
+         lat = st_coordinates(idw_jan2019)[, 2])
+
+idw_jan2022 <- idw_jan2022 %>%
+  mutate(lon = st_coordinates(idw_jan2022)[, 1], 
+         lat = st_coordinates(idw_jan2022)[, 2])
+
+# Sort lat descending and lon ascending
+# This because of raster package requires the data to be sorted in this way
+# From the up left corner to the bottom right corner
+idw_jan2019 <- idw_jan2019 %>%
+  arrange(desc(lat)) %>%
+  arrange(lon)
+idw_jan2022 <- idw_jan2022 %>%
+  arrange(desc(lat)) %>%
+  arrange(lon)
+
+# convert to matrix which has ncell = lon * lat
+lon <- unique(idw_jan2019$lon); nlon <- length(lon)
+lat <- unique(idw_jan2019$lat); nlat <- length(lat)
+idw_mat_jan2019 <- matrix(idw_jan2019$var1.pred, nrow = nlat, ncol = nlon)
+idw_mat_jan2022 <- matrix(idw_jan2022$var1.pred, nrow = nlat, ncol = nlon)
+
+# Convert to raster
+idw_raster_jan2019 <- raster(idw_mat_jan2019, xmn = min(lon), xmx = max(lon), 
+                             ymn = min(lat), ymx = max(lat))
+idw_raster_jan2022 <- raster(idw_mat_jan2022, xmn = min(lon), xmx = max(lon), 
+                             ymn = min(lat), ymx = max(lat))
+
+# Mask the raster with the boundary of Pulau Jawa
+p_jawa <- st_read("data/jawa.geojson")
+stck <- stack(idw_raster_jan2019, idw_raster_jan2022)
+stck <- mask(stck, p_jawa)
+names(stck) <- c("IDW Jan_2019", "IDW Jan_2022")
+
+# Plot the result
+idw_plt <- tm_shape(stck) + 
+  tm_raster(style = 'cont') + 
+  tm_shape(p_jawa) + 
+  tm_borders() +
+  tm_facets(nrow = 2)
+idw_plt
+```
+
+![](images/idw_R.png){width="70%"}
+
+## Python
+
+```{python idw-py}
+import geopandas as gpd
+import numpy as np
+import xarray as xr
+import rioxarray as rxr
+import matplotlib.pyplot as plt
+import cartopy.crs as ccrs
+from matplotlib.colors import LinearSegmentedColormap
+
+# Filter for January 2019 and 2022
+dats_monthly_jan = dats_monthly[(dats_monthly['Bulan'].dt.month == 1) & (dats_monthly['Bulan'].dt.year.isin([2019, 2022]))]
+dats_monthly_jan_2019 = dats_monthly_jan[dats_monthly_jan['Bulan'].dt.year == 2019]
+dats_monthly_jan_2022 = dats_monthly_jan[dats_monthly_jan['Bulan'].dt.year == 2022]
+
+# Define grid space
+grid_space = 0.05
+
+# Define grid_lon and grid_lat based on the min and max of lon and lat
+grid_lon = np.arange(dats_monthly_jan['lon'].min(), dats_monthly_jan['lon'].max(), grid_space)
+grid_lat = np.arange(dats_monthly_jan['lat'].min(), dats_monthly_jan['lat'].max(), grid_space)
+
+# Combine grid_lon and grid_lat into a meshgrid
+all_lats = np.meshgrid(grid_lon, grid_lat)[1].ravel()
+all_lons = np.meshgrid(grid_lon, grid_lat)[0].ravel()
+
+# Make empty data frame and assign all_lats and all_lons to the data frame
+itrp = pd.DataFrame()
+itrp['lat'] = all_lats
+itrp['lon'] = all_lons
+
+# Do the IDW with sklearn.neighbors.KNeighborsRegressor
+from sklearn.neighbors import KNeighborsRegressor
+
+# Define the number of neighbors
+n_neighbors = 10
+
+# Define the power parameter
+power = 1
+
+# Define the KNeighborsRegressor
+knn = KNeighborsRegressor(n_neighbors=n_neighbors, weights='distance', p=power)
+
+# Fit the KNeighborsRegressor
+knn_model = knn.fit(dats_monthly_jan_2019[['lon', 'lat']], dats_monthly_jan_2019['RR'])
+
+# Predict the value
+itrp['RR_2019'] = knn_model.predict(itrp[['lon', 'lat']])
+
+
+# Read the geojson file
+p_jawa = gpd.read_file('data/jawa.geojson')
+
+# Convert predicted data frame into xarray
+itrp_xr = xr.DataArray(itrp['RR_2019'].values.reshape(len(grid_lat), len(grid_lon)),
+                          coords={'lat': grid_lat, 'lon': grid_lon},
+                          dims=['lat', 'lon'])
+itrp_xr = itrp_xr.rio.write_crs("EPSG:4326")
+itrp_xr = itrp_xr.rio.set_spatial_dims("lon", "lat", inplace=True)
+
+# Masking the data with the polygon of Pulau Jawa
+itrp_xr_clipped = itrp_xr.rio.clip(p_jawa.geometry, drop=False)
+
+# Plot with matplotlib and cartopy
+# Color map customization: red, orange, yellow, green, blue
+colors = ['#FF0000', '#FFA500', '#FFFF00', '#00FF00', '#0000FF']
+cmap = LinearSegmentedColormap.from_list('mycmap', colors)
+
+# Create a figure and axis
+fig, ax = plt.subplots(subplot_kw={'projection': ccrs.PlateCarree()}, figsize=(9, 4))
+ax.set_extent([106, 114, -8, -6], crs=ccrs.PlateCarree())
+
+# Plot the data
+cs = ax.contourf(grid_lon, grid_lat, itrp_xr_clipped.values.reshape(len(grid_lat), len(grid_lon)),
+                 levels=range(0, 700, 25), transform=ccrs.PlateCarree(), cmap=cmap)
+fig.colorbar(cs, ax=ax, shrink=0.6, label='Rainfall (mm)')
+
+# Add gridlines just for left and bottom side
+ax.set_xticks(np.arange(106, 114, 1), crs=ccrs.PlateCarree())
+ax.set_xticklabels([f"{i}°E" for i in np.arange(106, 114, 1)])
+ax.set_yticks(np.arange(-8, -5, 1), crs=ccrs.PlateCarree())
+ax.set_yticklabels([f"{i}°S" for i in np.arange(8, 5, -1)])
+
+ax.set_xlabel('Longitude')
+ax.set_ylabel('Latitude')
+
+ax.add_geometries(p_jawa.geometry, crs=ccrs.PlateCarree(), facecolor='none', edgecolor='black')
+ax.title.set_text('Rainfall IDW January 2019')
+plt.savefig('idw_py.png', dpi=300, bbox_inches='tight')
+plt.show()
+```
+
+![](images/idw_py.png){width="60%"}
+
+:::
+
+## Visualisasi Data Iklim (1)
+
+::: {.panel-tabset}
+
+## R
+
+```{r eda-r, eval=TRUE, out.width="60%"}
+# library(ggplot2)
+# ggplot(dats) + 
+#   geom_bar(aes(x = Bulan, y = RR, fill = Lokasi), stat = "identity", position = "jitter")
+```
+
+## Python
+
+```{python eda-py, eval=TRUE, out.width="60%"}
+# import matplotlib.pyplot as plt
+
+# plt.figure(figsize=(10, 5))
+# for lokasi in dats['Lokasi'].unique():
+#     plt.plot(dats[dats['Lokasi'] == lokasi]['Bulan'], dats[dats['Lokasi'] == lokasi]['RR'], label=lokasi)
+# plt.legend()
+# plt.show()
+```
+
+:::
+
+
